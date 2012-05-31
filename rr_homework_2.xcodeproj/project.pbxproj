@@ -15,7 +15,8 @@
 		34FD54761578079C00357BE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FD54751578079C00357BE7 /* AppDelegate.m */; };
 		34FD54791578079C00357BE7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34FD54771578079C00357BE7 /* MainStoryboard_iPhone.storyboard */; };
 		34FD547C1578079C00357BE7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34FD547A1578079C00357BE7 /* MainStoryboard_iPad.storyboard */; };
-		34FD547F1578079C00357BE7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FD547E1578079C00357BE7 /* ViewController.m */; };
+		34FD547F1578079C00357BE7 /* PlacesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FD547E1578079C00357BE7 /* PlacesVC.m */; };
+		34FD548815780A9F00357BE7 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FD548715780A9F00357BE7 /* FlickrFetcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +24,19 @@
 		34FD54651578079C00357BE7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34FD54671578079C00357BE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		34FD54691578079C00357BE7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		34FD546D1578079C00357BE7 /* rr_homework_2-Info.plist */ = {isa = PBXFileReference; path = "rr_homework_2-Info.plist"; sourceTree = "<group>"; };
+		34FD546D1578079C00357BE7 /* rr_homework_2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rr_homework_2-Info.plist"; sourceTree = "<group>"; };
 		34FD546F1578079C00357BE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		34FD54711578079C00357BE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		34FD54731578079C00357BE7 /* rr_homework_2-Prefix.pch */ = {isa = PBXFileReference; path = "rr_homework_2-Prefix.pch"; sourceTree = "<group>"; };
-		34FD54741578079C00357BE7 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		34FD54731578079C00357BE7 /* rr_homework_2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rr_homework_2-Prefix.pch"; sourceTree = "<group>"; };
+		34FD54741578079C00357BE7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		34FD54751578079C00357BE7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		34FD54781578079C00357BE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		34FD547B1578079C00357BE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		34FD547D1578079C00357BE7 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
-		34FD547E1578079C00357BE7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		34FD547D1578079C00357BE7 /* PlacesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacesVC.h; sourceTree = "<group>"; };
+		34FD547E1578079C00357BE7 /* PlacesVC.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = PlacesVC.m; sourceTree = "<group>"; };
+		34FD548515780A9F00357BE7 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
+		34FD548615780A9F00357BE7 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrFetcher.h; sourceTree = "<group>"; };
+		34FD548715780A9F00357BE7 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +87,11 @@
 				34FD54751578079C00357BE7 /* AppDelegate.m */,
 				34FD54771578079C00357BE7 /* MainStoryboard_iPhone.storyboard */,
 				34FD547A1578079C00357BE7 /* MainStoryboard_iPad.storyboard */,
-				34FD547D1578079C00357BE7 /* ViewController.h */,
-				34FD547E1578079C00357BE7 /* ViewController.m */,
+				34FD547D1578079C00357BE7 /* PlacesVC.h */,
+				34FD547E1578079C00357BE7 /* PlacesVC.m */,
+				34FD548515780A9F00357BE7 /* FlickrAPIKey.h */,
+				34FD548615780A9F00357BE7 /* FlickrFetcher.h */,
+				34FD548715780A9F00357BE7 /* FlickrFetcher.m */,
 				34FD546C1578079C00357BE7 /* Supporting Files */,
 			);
 			path = rr_homework_2;
@@ -166,7 +173,8 @@
 			files = (
 				34FD54721578079C00357BE7 /* main.m in Sources */,
 				34FD54761578079C00357BE7 /* AppDelegate.m in Sources */,
-				34FD547F1578079C00357BE7 /* ViewController.m in Sources */,
+				34FD547F1578079C00357BE7 /* PlacesVC.m in Sources */,
+				34FD548815780A9F00357BE7 /* FlickrFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
