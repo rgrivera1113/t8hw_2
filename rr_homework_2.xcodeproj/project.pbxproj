@@ -17,6 +17,7 @@
 		34FD547C1578079C00357BE7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34FD547A1578079C00357BE7 /* MainStoryboard_iPad.storyboard */; };
 		34FD547F1578079C00357BE7 /* PlacesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FD547E1578079C00357BE7 /* PlacesVC.m */; };
 		34FD548815780A9F00357BE7 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FD548715780A9F00357BE7 /* FlickrFetcher.m */; };
+		34FD548B1578175A00357BE7 /* PhotoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34FD548A1578175A00357BE7 /* PhotoListVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		34FD548515780A9F00357BE7 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
 		34FD548615780A9F00357BE7 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrFetcher.h; sourceTree = "<group>"; };
 		34FD548715780A9F00357BE7 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
+		34FD54891578175A00357BE7 /* PhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PhotoListVC.h; sourceTree = "<group>"; };
+		34FD548A1578175A00357BE7 /* PhotoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoListVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				34FD547A1578079C00357BE7 /* MainStoryboard_iPad.storyboard */,
 				34FD547D1578079C00357BE7 /* PlacesVC.h */,
 				34FD547E1578079C00357BE7 /* PlacesVC.m */,
+				34FD54891578175A00357BE7 /* PhotoListVC.h */,
+				34FD548A1578175A00357BE7 /* PhotoListVC.m */,
 				34FD548515780A9F00357BE7 /* FlickrAPIKey.h */,
 				34FD548615780A9F00357BE7 /* FlickrFetcher.h */,
 				34FD548715780A9F00357BE7 /* FlickrFetcher.m */,
@@ -175,6 +180,7 @@
 				34FD54761578079C00357BE7 /* AppDelegate.m in Sources */,
 				34FD547F1578079C00357BE7 /* PlacesVC.m in Sources */,
 				34FD548815780A9F00357BE7 /* FlickrFetcher.m in Sources */,
+				34FD548B1578175A00357BE7 /* PhotoListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
