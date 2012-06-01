@@ -40,11 +40,11 @@
             </objects>
             <point key="canvasLocation" x="676" y="733"/>
         </scene>
-        <!--Geo Photo ListVC - Recently Viewed-->
+        <!--Table View Controller - Recently Viewed-->
         <scene sceneID="ZRo-If-f8A">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhl-oZ-103" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="Pgw-Kl-Z6k" customClass="GeoPhotoListVC" sceneMemberID="viewController">
+                <tableViewController id="Pgw-Kl-Z6k" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rvg-nV-Lok">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -225,20 +225,12 @@
             <point key="canvasLocation" x="1628" y="-234"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="PlacesVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3DQ-fn-8L3"/>
+        <segue reference="Z8f-xf-Rz5"/>
     </inferredMetricsTieBreakers>
 </document>
