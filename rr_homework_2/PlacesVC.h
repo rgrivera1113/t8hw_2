@@ -11,5 +11,6 @@
 @interface PlacesVC : UITableViewController
 
 @property (nonatomic,strong) NSArray* photoList;
+@property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
 
 @end

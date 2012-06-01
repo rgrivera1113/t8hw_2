@@ -1,5 +1,5 @@
 //
-//  PhotoListVC.h
+//  RecentPhotoListVC.h
 //  rr_homework_2
 //
 //  Created by Robert Rivera on 6/1/12.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoListVC.h"
 
-@interface PhotoListVC : UITableViewController
-
-@property (nonatomic,strong) NSArray* photoList;
+@interface RecentPhotoListVC : PhotoListVC
 
 @end

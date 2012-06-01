@@ -1,15 +1,16 @@
 //
-//  ViewController.m
+//  RecentlyViewedVC.m
 //  rr_homework_2
 //
 //  Created by Robert Rivera on 5/31/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PlacesVC.h"
+#import "GeoPhotoListVC.h"
 #import "FlickrFetcher.h"
 
-@implementation PlacesVC
+
+@implementation GeoPhotoListVC
 
 @synthesize photoList = _photoList;
 @synthesize refreshButton = _refreshButton;
@@ -47,10 +48,20 @@
     
 }
 
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)didReceiveMemoryWarning
 {
+    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
+    
     // Release any cached data, images, etc that aren't in use.
 }
 
@@ -59,7 +70,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -72,7 +88,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refresh:self.refreshButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -82,39 +97,35 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table Datasource
+#pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 0;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 0;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.photoList.count;
+    return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"PlaceCell";
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"RecentCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -122,17 +133,8 @@
     }
     
     // Configure the cell...
-    NSDictionary *photo = [self.photoList objectAtIndex:indexPath.row];
-    NSString* fullLocation = [photo objectForKey:FLICKR_PLACE_NAME];
-    NSArray* splitLocation = [fullLocation componentsSeparatedByString:@", "];
-    cell.textLabel.text = [splitLocation objectAtIndex:0];
-    NSRange detailIndex = [fullLocation rangeOfString:[splitLocation objectAtIndex:0]];
-    NSUInteger index = detailIndex.length;
-    
-    cell.detailTextLabel.text = [fullLocation substringFromIndex:index+2];
     
     return cell;
-    
 }
 
 #pragma mark - Table view delegate
@@ -147,6 +149,5 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
-
 
 @end

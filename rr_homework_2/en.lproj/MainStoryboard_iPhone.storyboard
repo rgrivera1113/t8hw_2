@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Fqm-qw-ZYt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Fqm-qw-ZYt">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
+        <!--Tab Bar Controller-->
         <scene sceneID="584-yy-Q1c">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KoO-Ko-g2w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -22,6 +24,7 @@
             </objects>
             <point key="canvasLocation" x="138" y="262"/>
         </scene>
+        <!--Navigation Controller - Recent-->
         <scene sceneID="2VT-bL-uHX">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mq5-X4-wph" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -37,10 +40,11 @@
             </objects>
             <point key="canvasLocation" x="676" y="733"/>
         </scene>
+        <!--Geo Photo ListVC - Recently Viewed-->
         <scene sceneID="ZRo-If-f8A">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhl-oZ-103" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="Pgw-Kl-Z6k" customClass="PhotoListVC" sceneMemberID="viewController">
+                <tableViewController id="Pgw-Kl-Z6k" customClass="GeoPhotoListVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rvg-nV-Lok">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,11 +68,14 @@
                             <outlet property="delegate" destination="Pgw-Kl-Z6k" id="8wR-kU-c6a"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recently Viewed" id="t2o-9U-cPp"/>
+                    <navigationItem key="navigationItem" title="Recently Viewed" id="t2o-9U-cPp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="BlE-jd-yeE"/>
+                    </navigationItem>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1156" y="733"/>
         </scene>
+        <!--View Controller-->
         <scene sceneID="1Bl-Sb-Obv">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGC-ZD-x3S" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,6 +96,7 @@
             </objects>
             <point key="canvasLocation" x="2166" y="733"/>
         </scene>
+        <!--Navigation Controller - Places-->
         <scene sceneID="i19-rU-r98">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="87J-Nn-LnG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -107,6 +115,7 @@
             </objects>
             <point key="canvasLocation" x="676" y="-234"/>
         </scene>
+        <!--PlacesVC - Places-->
         <scene sceneID="VR1-3I-91C">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXT-11-hvb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -157,25 +166,45 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="h7k-h7-6c9" id="67G-qU-vBK"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1156" y="-234"/>
         </scene>
+        <!--Geo Photo ListVC-->
         <scene sceneID="QE3-7I-4eY">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLZ-fC-EXQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="A2K-G2-vaA" customClass="PhotoListVC" sceneMemberID="viewController">
+                <tableViewController id="A2K-G2-vaA" customClass="GeoPhotoListVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="B3t-DA-C7d">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="GS2-8a-xaH">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="qhT-S7-c2h" detailTextLabel="gux-ce-wgC" style="IBUITableViewCellStyleSubtitle" id="GS2-8a-xaH">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qhT-S7-c2h">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gux-ce-wgC">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
@@ -188,18 +217,20 @@
                             <outlet property="delegate" destination="A2K-G2-vaA" id="mlQ-tc-DRe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yHa-0Y-Zy4"/>
+                    <navigationItem key="navigationItem" id="yHa-0Y-Zy4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="RoD-hv-a1Y"/>
+                    </navigationItem>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1628" y="-234"/>
         </scene>
     </scenes>
     <classes>
-        <class className="PhotoListVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoListVC.h"/>
-        </class>
         <class className="PlacesVC" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -208,6 +239,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Z8f-xf-Rz5"/>
+        <segue reference="3DQ-fn-8L3"/>
     </inferredMetricsTieBreakers>
 </document>

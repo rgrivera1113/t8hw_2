@@ -1,16 +1,64 @@
 //
-//  PhotoListVC.m
+//  RecentPhotoListVC.m
 //  rr_homework_2
 //
 //  Created by Robert Rivera on 6/1/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PhotoListVC.h"
+#import "RecentPhotoListVC.h"
 
-@implementation PhotoListVC
 
-@synthesize photoList = _photoList;
+@implementation RecentPhotoListVC
+
+//- (IBAction)refresh:(id)sender
+//{
+//    
+//    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+//        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        [spinner startAnimating];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+//    }
+//    
+//    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
+//    dispatch_async(downloadQueue, ^{
+//        NSArray *photos = [FlickrFetcher topPlaces];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.navigationItem.rightBarButtonItem = sender;
+//            self.photoList = photos;
+//        });
+//    });
+//    dispatch_release(downloadQueue);
+//}
+//
+//
+//- (void) setPhotoList:(NSArray *)photoList {
+//    
+//    if (_photoList != photoList) {
+//        
+//        _photoList = photoList;
+//        
+//        if (self.tableView.window) 
+//            [self.tableView reloadData];
+//    }
+//    
+//}
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
 
 #pragma mark - View lifecycle
 
@@ -55,21 +103,23 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.photoList.count; 
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
