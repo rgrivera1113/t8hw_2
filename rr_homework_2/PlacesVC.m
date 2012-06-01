@@ -7,8 +7,45 @@
 //
 
 #import "PlacesVC.h"
+#import "FlickrFetcher.h"
 
 @implementation PlacesVC
+
+@synthesize photoList = _photoList;
+
+- (IBAction)refresh:(id)sender
+{
+    // might want to use introspection to be sure sender is UIBarButtonItem
+    // (if not, it can skip the spinner)
+    // that way this method can be a little more generic
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:spinner];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
+    dispatch_async(downloadQueue, ^{
+        NSArray *photos = [FlickrFetcher topPlaces];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.navigationItem.rightBarButtonItem = sender;
+            self.photoList = photos;
+        });
+    });
+    dispatch_release(downloadQueue);
+}
+
+
+- (void) setPhotoList:(NSArray *)photoList {
+    
+    if (_photoList != photoList) {
+        
+        _photoList = photoList;
+        
+        if (self.tableView.window) 
+            [self.tableView reloadData];
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -63,14 +100,14 @@
 
 #pragma mark - Table Datasource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 0;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 0;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return self.photoList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,6 +120,15 @@
     }
     
     // Configure the cell...
+    NSDictionary *photo = [self.photoList objectAtIndex:indexPath.row];
+    NSString* fullLocation = [photo objectForKey:FLICKR_PLACE_NAME];
+    NSArray* splitLocation = [fullLocation componentsSeparatedByString:@", "];
+    cell.textLabel.text = [splitLocation objectAtIndex:0];
+    NSRange detailIndex = [fullLocation rangeOfString:[splitLocation objectAtIndex:0]];
+    NSUInteger index = detailIndex.length;
+    
+    
+    cell.detailTextLabel.text = [fullLocation substringFromIndex:index+2];
     
     return cell;
     

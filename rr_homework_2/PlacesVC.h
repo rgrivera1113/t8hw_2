@@ -10,4 +10,6 @@
 
 @interface PlacesVC : UITableViewController
 
+@property (nonatomic,strong) NSArray* photoList;
+
 @end
