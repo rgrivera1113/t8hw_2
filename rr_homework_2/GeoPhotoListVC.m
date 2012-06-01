@@ -1,19 +1,21 @@
 //
-//  RecentlyViewedVC.m
+//  PhotoListVC.m
 //  rr_homework_2
 //
-//  Created by Robert Rivera on 5/31/12.
+//  Created by Robert Rivera on 6/1/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "GeoPhotoListVC.h"
 #import "FlickrFetcher.h"
 
-
 @implementation GeoPhotoListVC
 
 @synthesize photoList = _photoList;
 @synthesize refreshButton = _refreshButton;
+@synthesize photoLocation = _photoLocation;
+
+#pragma mark - View lifecycle
 
 - (IBAction)refresh:(id)sender
 {
@@ -26,7 +28,7 @@
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
-        NSArray *photos = [FlickrFetcher topPlaces];
+        NSArray *photos = [FlickrFetcher photosInPlace:self.photoLocation maxResults:50];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem = sender;
             self.photoList = photos;
@@ -48,24 +50,19 @@
     
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+- (void) setRefreshButton: (UIBarButtonItem*) button{
     
-    // Release any cached data, images, etc that aren't in use.
+    if (_refreshButton != button) {
+    
+        _refreshButton = button;
+        
+        if (!_refreshButton)
+            self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+                                                                               target:self 
+                                                                               action:@selector(refresh:)];
+    }
 }
 
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -73,9 +70,11 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+                                                                       target:self 
+                                                                       action:@selector(refresh:)];
+    self.navigationItem.rightBarButtonItem = self.refreshButton;
+    self.navigationItem.title = [self.photoLocation objectForKey:FLICKR_PLACE_NAME];
 }
 
 - (void)viewDidUnload
@@ -88,6 +87,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self refresh:self.refreshButton];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -108,32 +109,47 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    // Return the number of sections.
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    // Return the number of rows in the section.
+    return self.photoList.count; 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"RecentCell";
+    static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
+    NSDictionary* photo = [self.photoList objectAtIndex:indexPath.row];
+    NSString* photoTitle = [photo valueForKey:FLICKR_PHOTO_TITLE];
+    NSString* photoDescription = [photo valueForKey:FLICKR_PHOTO_DESCRIPTION];
     
+    if (photoTitle.length < 1) {
+        if (photoDescription.length > 0)
+            cell.textLabel.text = photoDescription;
+        else 
+            cell.textLabel.text = @"Unknown";
+    } else {
+        cell.textLabel.text = photoTitle;
+        if (photoDescription.length > 0)
+            cell.detailTextLabel.text = photoDescription;
+    }
+        
     return cell;
 }
 

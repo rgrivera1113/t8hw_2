@@ -8,6 +8,7 @@
 
 #import "PlacesVC.h"
 #import "FlickrFetcher.h"
+#import "GeoPhotoListVC.h"
 
 @implementation PlacesVC
 
@@ -139,14 +140,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    // Create the GeoPhotoListVC, assign it's Location and push
+    // onto navigation stack.
+    GeoPhotoListVC* gpl = [[GeoPhotoListVC alloc] init];
+    gpl.photoLocation = [self.photoList objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:gpl animated:YES];
 }
-
-
 @end
