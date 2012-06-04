@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34A562D115797226003A8323 /* RecentPhotoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562D015797226003A8323 /* RecentPhotoListVC.m */; };
+		34A562D8157D036E003A8323 /* PhotoViewerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562D7157D036E003A8323 /* PhotoViewerVC.m */; };
 		34FD54661578079C00357BE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD54651578079C00357BE7 /* UIKit.framework */; };
 		34FD54681578079C00357BE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD54671578079C00357BE7 /* Foundation.framework */; };
 		34FD546A1578079C00357BE7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD54691578079C00357BE7 /* CoreGraphics.framework */; };
@@ -21,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34A562CF15797226003A8323 /* RecentPhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotoListVC.h; sourceTree = "<group>"; };
+		34A562D015797226003A8323 /* RecentPhotoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotoListVC.m; sourceTree = "<group>"; };
+		34A562D6157D036E003A8323 /* PhotoViewerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerVC.h; sourceTree = "<group>"; };
+		34A562D7157D036E003A8323 /* PhotoViewerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerVC.m; sourceTree = "<group>"; };
 		34FD54611578079C00357BE7 /* rr_homework_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rr_homework_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FD54651578079C00357BE7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		34FD54671578079C00357BE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -89,11 +95,15 @@
 				34FD54741578079C00357BE7 /* AppDelegate.h */,
 				34FD54751578079C00357BE7 /* AppDelegate.m */,
 				34FD54771578079C00357BE7 /* MainStoryboard_iPhone.storyboard */,
+				34A562D6157D036E003A8323 /* PhotoViewerVC.h */,
+				34A562D7157D036E003A8323 /* PhotoViewerVC.m */,
 				34FD547A1578079C00357BE7 /* MainStoryboard_iPad.storyboard */,
 				34FD547D1578079C00357BE7 /* PlacesVC.h */,
 				34FD547E1578079C00357BE7 /* PlacesVC.m */,
 				34FD54891578175A00357BE7 /* GeoPhotoListVC.h */,
 				34FD548A1578175A00357BE7 /* GeoPhotoListVC.m */,
+				34A562CF15797226003A8323 /* RecentPhotoListVC.h */,
+				34A562D015797226003A8323 /* RecentPhotoListVC.m */,
 				34FD548515780A9F00357BE7 /* FlickrAPIKey.h */,
 				34FD548615780A9F00357BE7 /* FlickrFetcher.h */,
 				34FD548715780A9F00357BE7 /* FlickrFetcher.m */,
@@ -181,6 +191,8 @@
 				34FD547F1578079C00357BE7 /* PlacesVC.m in Sources */,
 				34FD548815780A9F00357BE7 /* FlickrFetcher.m in Sources */,
 				34FD548B1578175A00357BE7 /* GeoPhotoListVC.m in Sources */,
+				34A562D115797226003A8323 /* RecentPhotoListVC.m in Sources */,
+				34A562D8157D036E003A8323 /* PhotoViewerVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
