@@ -8,6 +8,7 @@
 
 #import "GeoPhotoListVC.h"
 #import "FlickrFetcher.h"
+#import "PhotoViewerVC.h"
 
 @implementation GeoPhotoListVC
 
@@ -112,6 +113,19 @@
     return YES;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"PresentGeoImage"]) {
+        
+        // Set the photo to be shown.
+        NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
+        [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
+        [(PhotoViewerVC*) segue.destinationViewController setTitle:[[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
+        
+    }
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -128,7 +142,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"GeoPhotoCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -137,17 +151,20 @@
     
     NSDictionary* photo = [self.photoList objectAtIndex:indexPath.row];
     NSString* photoTitle = [photo valueForKey:FLICKR_PHOTO_TITLE];
-    NSString* photoDescription = [photo valueForKey:FLICKR_PHOTO_DESCRIPTION];
+    NSString* photoDescription = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
     
     if (photoTitle.length < 1) {
         if (photoDescription.length > 0)
             cell.textLabel.text = photoDescription;
         else 
             cell.textLabel.text = @"Unknown";
+        cell.detailTextLabel.text = @"";
     } else {
         cell.textLabel.text = photoTitle;
         if (photoDescription.length > 0)
             cell.detailTextLabel.text = photoDescription;
+        else
+            cell.detailTextLabel.text = @"";
     }
         
     return cell;
@@ -157,13 +174,39 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    // Build the URL for the recently viewed photo log.
+    NSFileManager* fm = [NSFileManager defaultManager];
+    NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+    NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
+    
+    NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
+    NSString* photoCandidate = [[self.photoList objectAtIndex:indexPath.row] objectForKey:FLICKR_PHOTO_ID];
+    BOOL exists = NO;
+    
+    NSString* pid;
+    for (NSDictionary* photo in recentCollection) {
+        pid = [photo objectForKey:FLICKR_PHOTO_ID];
+        if ([photoCandidate isEqualToString:pid]) {
+            exists = YES;
+            break;
+        }
+    }
+    
+    if (!exists) {
+        if (recentCollection == nil) {
+            recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
+            [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
+        } else if (recentCollection.count < 20) {
+            [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
+        } else {
+            [recentCollection removeLastObject];
+            [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
+        }
+        
+        // Save the array back to the file.
+        [[recentCollection copy] writeToURL:filePath atomically:YES];
+        
+    }
 }
 
 @end

@@ -142,8 +142,10 @@
 {
     // Create the GeoPhotoListVC, assign it's Location and push
     // onto navigation stack.
-    GeoPhotoListVC* gpl = [[GeoPhotoListVC alloc] init];
+    
+    GeoPhotoListVC* gpl = [self.storyboard instantiateViewControllerWithIdentifier:@"GeoPhotoList"];
     gpl.photoLocation = [self.photoList objectAtIndex:indexPath.row];
+    
     [self.navigationController pushViewController:gpl animated:YES];
 }
 @end
