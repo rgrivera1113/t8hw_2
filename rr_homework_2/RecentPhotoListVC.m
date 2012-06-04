@@ -68,23 +68,23 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    NSFileManager* fm = [NSFileManager defaultManager];
-    NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
-    NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
-    
-    NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
-    if (recentCollection == nil) {
-        recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
-    }
-    self.photoList = [recentCollection copy];
-    [self.tableView reloadData];
-    
-    
-    
-}
+//- (void) viewWillAppear:(BOOL)animated {
+//    
+//    [super viewWillAppear:animated];
+//    NSFileManager* fm = [NSFileManager defaultManager];
+//    NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+//    NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
+//    
+//    NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
+//    if (recentCollection == nil) {
+//        recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
+//    }
+//    self.photoList = [recentCollection copy];
+//    [self.tableView reloadData];
+//    
+//    
+//    
+//}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
