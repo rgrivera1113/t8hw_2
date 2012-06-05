@@ -69,6 +69,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    id detailView = [self splitViewPhotoDetail];
+    if (detailView) {
+        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+        if (button) {
+            button.title = self.navigationItem.title;
+        }
+    }
+
 }
 
 - (void)viewDidUnload

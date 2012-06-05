@@ -14,6 +14,7 @@
 @property (nonatomic,weak) IBOutlet UIScrollView* photoScroll;
 @property (nonatomic,weak) IBOutlet UIImageView* photoView;
 @property (nonatomic,weak) IBOutlet UIToolbar* rotationBar;
+@property (nonatomic,weak) IBOutlet UIBarButtonItem* photoTitle;
 
 @end
 
@@ -24,6 +25,7 @@
 @synthesize photoView = _photoView;
 @synthesize rotationBar = _rotationBar;
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
+@synthesize photoTitle = _photoTitle;
 
 # pragma mark <splitviewpresenter> implementation
 - (void) handlePopoverBarButton: (UIBarButtonItem*) barButtonItem {
@@ -88,7 +90,19 @@
     // Grab the URL for the photo and kick off the image load.
     // When the load is finished, create an image view and add to the scrollview.
     NSURL* photoURL = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatOriginal];
+    // Set all of the values for the toolbar.
     [self handlePopoverBarButton:self.splitViewBarButtonItem];
+    NSString* photoTitle = [self.photo valueForKey:FLICKR_PHOTO_TITLE];
+    NSString* photoDescription = [self.photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+    if (photoTitle.length < 1) {
+        if (photoDescription.length > 0)
+            self.photoTitle.title = photoDescription;
+        else 
+            self.photoTitle.title = @"Unknown";
+    } else {
+        self.photoTitle.title = photoTitle;
+    }
+    
     //self.rotationBar. = [[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);

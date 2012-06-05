@@ -10,6 +10,6 @@
 
 @protocol SplitViewPresenter <NSObject>
 
-@property (nonatomic, strong) UIBarButtonItem *splitViewBarButtonItem;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *splitViewBarButtonItem;
 
 @end

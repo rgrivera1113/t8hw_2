@@ -149,8 +149,14 @@
         // Set the photo to be shown.
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
         [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
-        // Move this to the other side of the segue at view will appear of the destination.
-        //  [(PhotoViewerVC*) [segue.destinationViewController = [[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
+        // Rename the popover in the rotation toolbar.
+        id detailView = [self splitViewPhotoDetail];
+        if (detailView) {
+            UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+            if (button) {
+                button.title = self.navigationItem.title;
+            }
+        }
         [self moveBarButtonItemTo:segue.destinationViewController];
         
     }
