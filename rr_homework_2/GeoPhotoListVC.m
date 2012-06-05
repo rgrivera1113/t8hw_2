@@ -9,6 +9,7 @@
 #import "GeoPhotoListVC.h"
 #import "FlickrFetcher.h"
 #import "PhotoViewerVC.h"
+#import "SplitViewPresenter.h"
 
 @implementation GeoPhotoListVC
 
@@ -63,7 +64,16 @@
                                                                                action:@selector(refresh:)];
     }
 }
-
+- (id<SplitViewPresenter>) splitViewPhotoDetail {
+    
+    id photoVC = [self.splitViewController.viewControllers lastObject];
+    if (![photoVC conformsToProtocol:@protocol(SplitViewPresenter)]) {
+        photoVC = nil;
+    }
+    return photoVC;
+    
+    
+}
 
 - (void)viewDidLoad
 {
@@ -76,6 +86,16 @@
                                                                        action:@selector(refresh:)];
     self.navigationItem.rightBarButtonItem = self.refreshButton;
     self.navigationItem.title = [self.photoLocation objectForKey:FLICKR_PLACE_NAME];
+    
+    // Rename the popover in the rotation toolbar.
+    id detailView = [self splitViewPhotoDetail];
+    if (detailView) {
+        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+        if (button) {
+            button.title = self.navigationItem.title;
+        }
+    }
+    
 }
 
 - (void)viewDidUnload
@@ -113,6 +133,15 @@
     return YES;
 }
 
+- (void)moveBarButtonItemTo:(id)destinationViewController
+{
+    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewPhotoDetail] splitViewBarButtonItem];
+    [[self splitViewPhotoDetail] setSplitViewBarButtonItem:nil];
+    if (splitViewBarButtonItem) {
+        [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"PresentGeoImage"]) {
@@ -120,7 +149,9 @@
         // Set the photo to be shown.
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
         [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
-        [(PhotoViewerVC*) segue.destinationViewController setTitle:[[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
+        // Move this to the other side of the segue at view will appear of the destination.
+        //  [(PhotoViewerVC*) [segue.destinationViewController = [[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
+        [self moveBarButtonItemTo:segue.destinationViewController];
         
     }
     

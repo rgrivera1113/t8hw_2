@@ -81,7 +81,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    // Rename the popover in the rotation toolbar.
+    id detailView = [self splitViewPhotoDetail];
+    if (detailView) {
+        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+        if (button) {
+            button.title = self.navigationItem.title;
+        }
+    }
     [self refresh:self.refreshButton];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -120,15 +129,6 @@
     
 }
 
-- (void)moveBarButtonItemTo:(id)destinationViewController
-{
-    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewPhotoDetail] splitViewBarButtonItem];
-    [[self splitViewPhotoDetail] setSplitViewBarButtonItem:nil];
-    if (splitViewBarButtonItem) {
-        [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
-    }
-}
-
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"PresentGeoPhotoList"]) {
@@ -136,7 +136,6 @@
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
         [(GeoPhotoListVC*) segue.destinationViewController 
          setPhotoLocation:[self.photoList objectAtIndex:selected.row]];
-        
     }
     
     

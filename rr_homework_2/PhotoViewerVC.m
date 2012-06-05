@@ -30,7 +30,7 @@
     
     // Remove the current items in the toolbar and replace them
     // with the new bar button item.
-    NSMutableArray *toolbarItems = [self.rotationBar.items mutableCopy];
+    NSMutableArray *toolbarItems = [[NSMutableArray alloc] initWithArray:self.rotationBar.items];
     
     if (_splitViewBarButtonItem) 
         [toolbarItems removeObject:_splitViewBarButtonItem];
@@ -39,6 +39,7 @@
         [toolbarItems insertObject:barButtonItem atIndex:0];
     
     self.rotationBar.items = [toolbarItems copy];
+    
     _splitViewBarButtonItem = barButtonItem;
     
 }
@@ -87,6 +88,8 @@
     // Grab the URL for the photo and kick off the image load.
     // When the load is finished, create an image view and add to the scrollview.
     NSURL* photoURL = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatOriginal];
+    [self handlePopoverBarButton:self.splitViewBarButtonItem];
+    //self.rotationBar. = [[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
