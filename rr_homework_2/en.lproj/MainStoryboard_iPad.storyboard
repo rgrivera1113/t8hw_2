@@ -235,7 +235,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="TopLeft" id="Jtg-Of-x6i">
-                                        <rect key="frame" x="0.0" y="-45" width="768" height="1005"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -251,6 +251,7 @@
                     <connections>
                         <outlet property="photoScroll" destination="LRg-Wo-I3U" id="axJ-9N-6AE"/>
                         <outlet property="photoView" destination="Jtg-Of-x6i" id="J9o-o5-1E9"/>
+                        <outlet property="rotationBar" destination="2Mz-qv-IUF" id="J68-53-yM0"/>
                     </connections>
                 </viewController>
             </objects>
@@ -269,6 +270,7 @@
             <relationships>
                 <relationship kind="outlet" name="photoScroll" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="rotationBar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="PlacesVC" superclassName="UITableViewController">

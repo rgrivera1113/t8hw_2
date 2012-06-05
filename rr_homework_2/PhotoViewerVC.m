@@ -13,6 +13,7 @@
 
 @property (nonatomic,weak) IBOutlet UIScrollView* photoScroll;
 @property (nonatomic,weak) IBOutlet UIImageView* photoView;
+@property (nonatomic,weak) IBOutlet UIToolbar* rotationBar;
 
 @end
 
@@ -21,13 +22,37 @@
 @synthesize photo = _photo;
 @synthesize photoScroll = _photoScroll;
 @synthesize photoView = _photoView;
+@synthesize rotationBar = _rotationBar;
+@synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 
+# pragma mark <splitviewpresenter> implementation
+- (void) handlePopoverBarButton: (UIBarButtonItem*) barButtonItem {
+    
+    // Remove the current items in the toolbar and replace them
+    // with the new bar button item.
+    NSMutableArray *toolbarItems = [self.rotationBar.items mutableCopy];
+    
+    if (_splitViewBarButtonItem) 
+        [toolbarItems removeObject:_splitViewBarButtonItem];
+    
+    if (barButtonItem) 
+        [toolbarItems insertObject:barButtonItem atIndex:0];
+    
+    self.rotationBar.items = [toolbarItems copy];
+    _splitViewBarButtonItem = barButtonItem;
+    
+}
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    if (splitViewBarButtonItem != _splitViewBarButtonItem)
+        [self handlePopoverBarButton:splitViewBarButtonItem];
+}
 
 - (void) setPhoto:(NSDictionary *)photo {
     
     if (_photo != photo)
         _photo = photo;
-    
 }
 
 
