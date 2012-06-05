@@ -120,18 +120,6 @@
     
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"PresentGeoPhotoList"]) {
-        
-        NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
-        [(GeoPhotoListVC*) segue.destinationViewController 
-         setPhotoLocation:[self.photoList objectAtIndex:selected.row]];
-    }
-    
-    
-}
-
 - (void)moveBarButtonItemTo:(id)destinationViewController
 {
     UIBarButtonItem *splitViewBarButtonItem = [[self splitViewPhotoDetail] splitViewBarButtonItem];
@@ -141,6 +129,18 @@
     }
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"PresentGeoPhotoList"]) {
+        
+        NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
+        [(GeoPhotoListVC*) segue.destinationViewController 
+         setPhotoLocation:[self.photoList objectAtIndex:selected.row]];
+        
+    }
+    
+    
+}
 
 #pragma mark - Table Datasource
 

@@ -17,6 +17,19 @@
     self.splitViewController.delegate = self;
 }
 
+
+- (void)viewDidLoad  // always try to be the split view's delegate
+{
+    [super viewDidLoad];
+    self.splitViewController.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated  // always try to be the split view's delegate
+{
+    [super viewWillAppear:animated];
+    self.splitViewController.delegate = self;
+}
+
 - (id <SplitViewPresenter>)splitViewBarButtonItemPresenter
 {
     id detailVC = [self.splitViewController.viewControllers lastObject];
@@ -38,7 +51,7 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
-    barButtonItem.title = @"Calculator";
+    barButtonItem.title = @"Places";
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
 }
 
