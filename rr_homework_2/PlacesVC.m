@@ -9,11 +9,19 @@
 #import "PlacesVC.h"
 #import "FlickrFetcher.h"
 #import "GeoPhotoListVC.h"
+#import "SplitViewPresenter.h"
+
+@interface PlacesVC ()
+
+@property (nonatomic,weak) IBOutlet UITableView* tableView;
+
+@end
 
 @implementation PlacesVC
 
 @synthesize photoList = _photoList;
 @synthesize refreshButton = _refreshButton;
+@synthesize tableView = _tableView;
 
 - (IBAction)refresh:(id)sender
 {
@@ -101,12 +109,45 @@
     }
 }
 
+- (id<SplitViewPresenter>) splitViewPhotoDetail {
+    
+    id photoVC = [self.splitViewController.viewControllers lastObject];
+    if (![photoVC conformsToProtocol:@protocol(SplitViewPresenter)]) {
+        photoVC = nil;
+    }
+    return photoVC;
+    
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"PresentGeoPhotoList"]) {
+        
+        NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
+        [(GeoPhotoListVC*) segue.destinationViewController 
+         setPhotoLocation:[self.photoList objectAtIndex:selected.row]];
+    }
+    
+    
+}
+
+- (void)moveBarButtonItemTo:(id)destinationViewController
+{
+    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewPhotoDetail] splitViewBarButtonItem];
+    [[self splitViewPhotoDetail] setSplitViewBarButtonItem:nil];
+    if (splitViewBarButtonItem) {
+        [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
+    }
+}
+
+
 #pragma mark - Table Datasource
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 0;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -140,12 +181,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Create the GeoPhotoListVC, assign it's Location and push
-    // onto navigation stack.
     
-    GeoPhotoListVC* gpl = [self.storyboard instantiateViewControllerWithIdentifier:@"GeoPhotoList"];
-    gpl.photoLocation = [self.photoList objectAtIndex:indexPath.row];
+    // Nothing happens here for this view.
     
-    [self.navigationController pushViewController:gpl animated:YES];
 }
 @end

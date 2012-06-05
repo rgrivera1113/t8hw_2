@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RotatingViewController.h"
 
-@interface PlacesVC : UITableViewController
+@interface PlacesVC : RotatingViewController <UISplitViewControllerDelegate, 
+                                                UITableViewDelegate,
+                                                UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray* photoList;
 @property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
