@@ -41,7 +41,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAP-qp-yTm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController definesPresentationContext="YES" id="HMJ-Al-3xh" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="aBE-TL-39R">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -223,17 +223,24 @@
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" minimumZoomScale="0.10000000149011612" maximumZoomScale="5" id="ieo-TM-oHw">
-                                <rect key="frame" x="-20" y="-20" width="808" height="1044"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2Mz-qv-IUF">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Item" id="ZFj-HT-QLu"/>
+                                </items>
+                            </toolbar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" minimumZoomScale="0.20000000000000001" maximumZoomScale="3" id="LRg-Wo-I3U">
+                                <rect key="frame" x="0.0" y="44" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="TopLeft" id="efr-5H-js6">
-                                        <rect key="frame" x="20" y="20" width="768" height="1004"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="TopLeft" id="Jtg-Of-x6i">
+                                        <rect key="frame" x="0.0" y="-45" width="768" height="1005"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
                                 <connections>
-                                    <outlet property="delegate" destination="1JT-DH-LiF" id="NN8-aZ-xCf"/>
+                                    <outlet property="delegate" destination="1JT-DH-LiF" id="5EY-GP-Wl3"/>
                                 </connections>
                             </scrollView>
                         </subviews>
@@ -242,8 +249,8 @@
                     <navigationItem key="navigationItem" id="YR1-5O-Pfi"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
-                        <outlet property="photoScroll" destination="ieo-TM-oHw" id="RWx-L6-8zv"/>
-                        <outlet property="photoView" destination="efr-5H-js6" id="Ub7-em-YhM"/>
+                        <outlet property="photoScroll" destination="LRg-Wo-I3U" id="axJ-9N-6AE"/>
+                        <outlet property="photoView" destination="Jtg-Of-x6i" id="J9o-o5-1E9"/>
                     </connections>
                 </viewController>
             </objects>
