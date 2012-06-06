@@ -176,6 +176,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="Mkr-r7-f8U" kind="push" identifier="PresentGeoPhotoList" id="UHz-zp-0Ho"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -192,7 +195,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="refreshButton" destination="h7k-h7-6c9" id="67G-qU-vBK"/>
-                        <segue destination="Mkr-r7-f8U" kind="push" identifier="GeoPhotoList" id="6w1-Kg-nhG"/>
+                        <outlet property="tableView" destination="u4z-FM-JIa" id="8L1-i3-dOn"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -249,39 +252,12 @@
             <point key="canvasLocation" x="1619" y="-234"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="GeoPhotoListVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoPhotoListVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="PhotoViewerVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewerVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="photoScroll" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="PlacesVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="RecentPhotoListVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotoListVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Z8f-xf-Rz5"/>
+        <segue reference="U90-JA-3pe"/>
     </inferredMetricsTieBreakers>
 </document>

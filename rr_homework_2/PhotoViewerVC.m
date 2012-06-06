@@ -102,7 +102,7 @@
     } else {
         self.photoTitle.title = photoTitle;
     }
-    
+    self.navigationItem.title = photoTitle;
     //self.rotationBar. = [[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
