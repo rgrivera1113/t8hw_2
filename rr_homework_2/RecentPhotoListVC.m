@@ -45,12 +45,6 @@
     self.photoList = recentCollection;
     [self.tableView reloadData];
     
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -72,8 +66,7 @@
         photoVC = nil;
     }
     return photoVC;
-    
-    
+
 }
 
 - (void)moveBarButtonItemTo:(id)destinationViewController
