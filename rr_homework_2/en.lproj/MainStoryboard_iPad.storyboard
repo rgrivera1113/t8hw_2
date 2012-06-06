@@ -228,7 +228,7 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2Mz-qv-IUF">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="oOS-6G-g7e"/>
                                     <barButtonItem title="Item" style="plain" id="A4A-Pb-X8G"/>
@@ -278,7 +278,6 @@
                 <relationship kind="outlet" name="photoTitle" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="rotationBar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="splitViewBarButtonItem" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="PlacesVC" superclassName="RotatingViewController">

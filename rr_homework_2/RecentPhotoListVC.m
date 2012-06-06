@@ -90,6 +90,27 @@
     return YES;
 }
 
+- (id<SplitViewPresenter>) splitViewPhotoDetail {
+    
+    id photoVC = [self.splitViewController.viewControllers lastObject];
+    if (![photoVC conformsToProtocol:@protocol(SplitViewPresenter)]) {
+        photoVC = nil;
+    }
+    return photoVC;
+    
+    
+}
+
+
+- (void)moveBarButtonItemTo:(id)destinationViewController
+{
+    UIBarButtonItem *splitViewBarButtonItem = [[self splitViewPhotoDetail] splitViewBarButtonItem];
+    [[self splitViewPhotoDetail] setSplitViewBarButtonItem:nil];
+    if (splitViewBarButtonItem) {
+        [destinationViewController setSplitViewBarButtonItem:splitViewBarButtonItem];
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"PresentRecentImage"]) {
@@ -98,7 +119,16 @@
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
         [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
         [(PhotoViewerVC*) segue.destinationViewController setTitle:[[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
-        
+        // Move the popover bar button item to new view.
+        id detailView = [self splitViewPhotoDetail];
+        if (detailView) {
+            UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+            if (button) {
+                button.title = self.navigationItem.title;
+            }
+        }
+        [self moveBarButtonItemTo:segue.destinationViewController];
+
     }
     
 }
