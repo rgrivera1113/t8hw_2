@@ -156,38 +156,43 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Build the URL for the recently viewed photo log.
-    NSFileManager* fm = [NSFileManager defaultManager];
-    NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
-    NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
-    
-    NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
-    NSString* photoCandidate = [[self.photoList objectAtIndex:indexPath.row] objectForKey:FLICKR_PHOTO_ID];
-    BOOL exists = NO;
-    
-    NSString* pid;
-    for (NSDictionary* photo in recentCollection) {
-        pid = [photo objectForKey:FLICKR_PHOTO_ID];
-        if ([photoCandidate isEqualToString:pid]) {
-            exists = YES;
-            break;
-        }
-    }
-    
-    if (!exists) {
-        if (recentCollection == nil) {
-            recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
-            [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
-        } else if (recentCollection.count < 20) {
-            [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
-        } else {
-            [recentCollection removeLastObject];
-            [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
+    dispatch_queue_t saveRecentQueue = dispatch_queue_create("save recent", NULL);
+    dispatch_async(saveRecentQueue, ^{
+        
+        NSFileManager* fm = [NSFileManager defaultManager];
+        NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+        NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
+        
+        NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
+        NSString* photoCandidate = [[self.photoList objectAtIndex:indexPath.row] objectForKey:FLICKR_PHOTO_ID];
+        BOOL exists = NO;
+        
+        NSString* pid;
+        for (NSDictionary* photo in recentCollection) {
+            pid = [photo objectForKey:FLICKR_PHOTO_ID];
+            if ([photoCandidate isEqualToString:pid]) {
+                exists = YES;
+                break;
+            }
         }
         
-        // Save the array back to the file.
-        [[recentCollection copy] writeToURL:filePath atomically:YES];
+        if (!exists) {
+            if (recentCollection == nil) {
+                recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
+                [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
+            } else if (recentCollection.count < 20) {
+                [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
+            } else {
+                [recentCollection removeLastObject];
+                [recentCollection insertObject:[self.photoList objectAtIndex:indexPath.row] atIndex:0];
+            }
+            
+            // Save the array back to the file.
+            [[recentCollection copy] writeToURL:filePath atomically:YES];
+        }
         
-    }
+    });
+    dispatch_release(saveRecentQueue);
 }
 
 @end
