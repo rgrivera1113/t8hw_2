@@ -247,6 +247,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="whiteLarge" id="x1g-2G-qK7">
+                                        <rect key="frame" x="366" y="461" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="1JT-DH-LiF" id="5EY-GP-Wl3"/>
@@ -258,6 +262,7 @@
                     <navigationItem key="navigationItem" id="YR1-5O-Pfi"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
+                        <outlet property="loadingIndicator" destination="x1g-2G-qK7" id="aFw-M6-wi0"/>
                         <outlet property="photoScroll" destination="LRg-Wo-I3U" id="axJ-9N-6AE"/>
                         <outlet property="photoTitle" destination="A4A-Pb-X8G" id="NFe-GL-kTz"/>
                         <outlet property="photoView" destination="Jtg-Of-x6i" id="J9o-o5-1E9"/>
