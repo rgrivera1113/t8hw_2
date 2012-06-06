@@ -19,7 +19,7 @@
 
 @implementation PlacesVC
 
-@synthesize photoList = _photoList;
+@synthesize locationList = _locationList;
 @synthesize refreshButton = _refreshButton;
 @synthesize tableView = _tableView;
 
@@ -44,11 +44,11 @@
 }
 
 
-- (void) setPhotoList:(NSArray *)photoList {
+- (void) setPhotoList:(NSArray *)locationList {
     
-    if (_photoList != photoList) {
+    if (_locationList != locationList) {
         
-        _photoList = photoList;
+        _locationList = locationList;
         
         if (self.tableView.window) 
             [self.tableView reloadData];
@@ -143,7 +143,7 @@
         
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
         [(GeoPhotoListVC*) segue.destinationViewController 
-         setPhotoLocation:[self.photoList objectAtIndex:selected.row]];
+         setPhotoLocation:[self.locationList objectAtIndex:selected.row]];
     }
     
     
@@ -158,7 +158,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.photoList.count;
+    return self.locationList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -171,8 +171,8 @@
     }
     
     // Configure the cell...
-    NSDictionary *photo = [self.photoList objectAtIndex:indexPath.row];
-    NSString* fullLocation = [photo objectForKey:FLICKR_PLACE_NAME];
+    NSDictionary *location = [self.locationList objectAtIndex:indexPath.row];
+    NSString* fullLocation = [location objectForKey:FLICKR_PLACE_NAME];
     NSArray* splitLocation = [fullLocation componentsSeparatedByString:@", "];
     cell.textLabel.text = [splitLocation objectAtIndex:0];
     NSRange detailIndex = [fullLocation rangeOfString:[splitLocation objectAtIndex:0]];
@@ -184,12 +184,4 @@
     
 }
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    // Nothing happens here for this view.
-    
-}
 @end

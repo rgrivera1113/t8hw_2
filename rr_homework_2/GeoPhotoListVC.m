@@ -190,7 +190,11 @@
             // Save the array back to the file.
             [[recentCollection copy] writeToURL:filePath atomically:YES];
         }
-        
+        // Once the work is done, move on with the segue.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"PresentGeoImage" sender:self];
+        });
+
     });
     dispatch_release(saveRecentQueue);
 }

@@ -87,6 +87,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
     // Grab the URL for the photo and kick off the image load.
     // When the load is finished, create an image view and add to the scrollview.
     NSURL* photoURL = [FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatOriginal];
@@ -103,7 +104,6 @@
         self.photoTitle.title = photoTitle;
     }
     self.navigationItem.title = photoTitle;
-    //self.rotationBar. = [[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
@@ -116,6 +116,7 @@
                                                     self.photoScroll.contentSize.width, 
                                                     self.photoScroll.contentSize.height) 
                                 animated:NO];
+            
         });
     });
     dispatch_release(downloadQueue);

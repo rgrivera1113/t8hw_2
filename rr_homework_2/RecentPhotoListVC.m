@@ -29,21 +29,26 @@
     
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Get the recent photo log from the filesystem.
-    // Build the URL for the recently viewed photo log.
-    NSFileManager* fm = [NSFileManager defaultManager];
-    NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
-    NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
+- (void) viewWillAppear:(BOOL)animated {
     
-    NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
-    if (recentCollection == nil) {
-        recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
-    }
-    self.photoList = recentCollection;
-    [self.tableView reloadData];
+    [super viewWillAppear:animated];
+    dispatch_queue_t displayListQueue = dispatch_queue_create("recent display", NULL);
+    dispatch_async(displayListQueue, ^{
+        
+        NSFileManager* fm = [NSFileManager defaultManager];
+        NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+        NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
+        
+        NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
+        if (recentCollection == nil) {
+            recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
+        }
+        self.photoList = recentCollection;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
+    dispatch_release(displayListQueue);
     
 }
 
