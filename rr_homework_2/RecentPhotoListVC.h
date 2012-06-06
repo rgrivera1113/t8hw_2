@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoListVC.h"
 
-@interface RecentPhotoListVC : UITableViewController
+@interface RecentPhotoListVC : PhotoListVC <UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic,strong) NSArray* photoList;
 @property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
 
 @end

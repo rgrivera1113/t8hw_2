@@ -50,7 +50,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecentCell" textLabel="B1S-wK-otf" detailTextLabel="Kuv-dD-B8u" style="IBUITableViewCellStyleSubtitle" id="AK8-cJ-7Mz">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PhotoCell" textLabel="B1S-wK-otf" detailTextLabel="Kuv-dD-B8u" style="IBUITableViewCellStyleSubtitle" id="AK8-cJ-7Mz">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -85,6 +85,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recently Viewed" id="t2o-9U-cPp"/>
+                    <connections>
+                        <outlet property="tableView" destination="rvg-nV-Lok" id="0Ik-Hf-SjS"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1156" y="733"/>
@@ -211,7 +214,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GeoPhotoCell" textLabel="f95-fL-mfX" detailTextLabel="Fu0-OP-mND" style="IBUITableViewCellStyleSubtitle" id="i3i-Kw-i2M">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PhotoCell" textLabel="f95-fL-mfX" detailTextLabel="Fu0-OP-mND" style="IBUITableViewCellStyleSubtitle" id="i3i-Kw-i2M">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -247,17 +250,59 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Fi6-GO-GIw"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="b0C-cb-YpU" id="4ZN-mH-DFY"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1619" y="-234"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="GeoPhotoListVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoPhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="PhotoListVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoListVC.h"/>
+        </class>
+        <class className="PhotoViewerVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="photoScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="photoTitle" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="rotationBar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="splitViewBarButtonItem" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="PlacesVC" superclassName="RotatingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RecentPhotoListVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RotatingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RotatingViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="U90-JA-3pe"/>
+        <segue reference="Z8f-xf-Rz5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		344E1A9F157FB2B400C6F1DF /* PhotoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E1A9E157FB2B400C6F1DF /* PhotoListVC.m */; };
 		34A562D115797226003A8323 /* RecentPhotoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562D015797226003A8323 /* RecentPhotoListVC.m */; };
 		34A562D8157D036E003A8323 /* PhotoViewerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562D7157D036E003A8323 /* PhotoViewerVC.m */; };
 		34F0BD88157EA0EC00B540D5 /* RotatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F0BD87157EA0EC00B540D5 /* RotatingViewController.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		344E1A9D157FB2B400C6F1DF /* PhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PhotoListVC.h; sourceTree = "<group>"; };
+		344E1A9E157FB2B400C6F1DF /* PhotoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoListVC.m; sourceTree = "<group>"; };
 		34A562CF15797226003A8323 /* RecentPhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotoListVC.h; sourceTree = "<group>"; };
 		34A562D015797226003A8323 /* RecentPhotoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotoListVC.m; sourceTree = "<group>"; };
 		34A562D6157D036E003A8323 /* PhotoViewerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerVC.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				34FD548A1578175A00357BE7 /* GeoPhotoListVC.m */,
 				34A562CF15797226003A8323 /* RecentPhotoListVC.h */,
 				34A562D015797226003A8323 /* RecentPhotoListVC.m */,
+				344E1A9D157FB2B400C6F1DF /* PhotoListVC.h */,
+				344E1A9E157FB2B400C6F1DF /* PhotoListVC.m */,
 				34FD548515780A9F00357BE7 /* FlickrAPIKey.h */,
 				34FD548615780A9F00357BE7 /* FlickrFetcher.h */,
 				34FD548715780A9F00357BE7 /* FlickrFetcher.m */,
@@ -201,6 +206,7 @@
 				34A562D115797226003A8323 /* RecentPhotoListVC.m in Sources */,
 				34A562D8157D036E003A8323 /* PhotoViewerVC.m in Sources */,
 				34F0BD88157EA0EC00B540D5 /* RotatingViewController.m in Sources */,
+				344E1A9F157FB2B400C6F1DF /* PhotoListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

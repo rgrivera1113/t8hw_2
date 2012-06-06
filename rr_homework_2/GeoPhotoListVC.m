@@ -11,11 +11,18 @@
 #import "PhotoViewerVC.h"
 #import "SplitViewPresenter.h"
 
+@interface GeoPhotoListVC ()
+
+@property (nonatomic,weak) IBOutlet UITableView* tableView;
+
+
+@end
+
 @implementation GeoPhotoListVC
 
-@synthesize photoList = _photoList;
 @synthesize refreshButton = _refreshButton;
 @synthesize photoLocation = _photoLocation;
+@synthesize tableView = _tableView;
 
 #pragma mark - View lifecycle
 
@@ -42,13 +49,9 @@
 
 - (void) setPhotoList:(NSArray *)photoList {
     
-    if (_photoList != photoList) {
-        
-        _photoList = photoList;
-        
-        if (self.tableView.window) 
-            [self.tableView reloadData];
-    }
+    [super setPhotoList:photoList];
+    if (self.tableView.window) 
+        [self.tableView reloadData];
     
 }
 
@@ -161,50 +164,6 @@
         
     }
     
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return self.photoList.count; 
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"GeoPhotoCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    NSDictionary* photo = [self.photoList objectAtIndex:indexPath.row];
-    NSString* photoTitle = [photo valueForKey:FLICKR_PHOTO_TITLE];
-    NSString* photoDescription = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
-    
-    if (photoTitle.length < 1) {
-        if (photoDescription.length > 0)
-            cell.textLabel.text = photoDescription;
-        else 
-            cell.textLabel.text = @"Unknown";
-        cell.detailTextLabel.text = @"";
-    } else {
-        cell.textLabel.text = photoTitle;
-        if (photoDescription.length > 0)
-            cell.detailTextLabel.text = photoDescription;
-        else
-            cell.detailTextLabel.text = @"";
-    }
-        
-    return cell;
 }
 
 #pragma mark - Table view delegate
