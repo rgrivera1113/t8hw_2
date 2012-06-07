@@ -8,6 +8,7 @@
 
 #import "PhotoViewerVC.h"
 #import "FlickrFetcher.h"
+#import "FlickrCacher.h"
 #import "PhotoListVC.h"
 #import "PhotoViewerDataSource.h"
 
@@ -124,6 +125,17 @@
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
+
+        NSString* fileName = [self.photo valueForKey:FLICKR_PHOTO_ID];
+        NSData* requestedImage = [FlickrCacher grabPhotoFromCache:fileName];
+        NSLog(@"Looking for image %@ in cache.",fileName);
+        
+        if (!requestedImage) {
+            NSLog(@"Image not in cache.  Going to Flickr.");
+            requestedImage = [NSData dataWithContentsOfURL:photoURL];
+        } else
+            NSLog(@"Image in cache.");
+
         if (![self.photoDelegate displayedPhoto]) {
         
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -133,8 +145,15 @@
         }
         else if (self.photo == [self.photoDelegate displayedPhoto]) {
             
-            NSData* requestedImage = [NSData dataWithContentsOfURL:photoURL];
-
+            // Only cache the image if it is still selected.
+            dispatch_queue_t cacheWriter = dispatch_queue_create("cache writer", NULL);
+            dispatch_async(cacheWriter, ^{
+                
+                NSLog(@"Sending %@ to cache.",fileName);
+                [FlickrCacher sendPhotoToCache:requestedImage as:fileName];
+                
+            });
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIImage* image = [UIImage imageWithData:requestedImage];
                 self.photoView.image = image;

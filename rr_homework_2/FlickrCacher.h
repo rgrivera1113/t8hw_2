@@ -1,0 +1,16 @@
+//
+//  FlickrCacher.h
+//  rr_homework_2
+//
+//  Created by Robert Rivera on 6/7/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface FlickrCacher : NSObject
+
++ (void) sendPhotoToCache: (NSData*) photo as: (NSString*) photoName;
++ (NSData*) grabPhotoFromCache: (NSString*) photoName;
+
+@end
