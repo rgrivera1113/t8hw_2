@@ -124,24 +124,17 @@
     
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
-        // Check the cache to see if this image is already there.
-        NSData* requestedImage = [NSData dataWithContentsOfURL:photoURL];
-        // If the returned photo information does not match 
-        // the photo currently selected by the delegate or a photo
-        // is not currently selected, put a call on the main thread
-        // to clear the loading indicator.
         if (![self.photoDelegate displayedPhoto]) {
         
-            NSLog(@"No photo currently selected, display nothing.");
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.loadingIndicator stopAnimating];            
             });
             
         }
         else if (self.photo == [self.photoDelegate displayedPhoto]) {
-            // Start and dispatch a cache request on a new thread.
-            // Make sure all file interactions happen on the same thread
-            // to avoid concurrency issues.
+            
+            NSData* requestedImage = [NSData dataWithContentsOfURL:photoURL];
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIImage* image = [UIImage imageWithData:requestedImage];
                 self.photoView.image = image;
@@ -152,9 +145,7 @@
                                     animated:NO];
                 [self.loadingIndicator stopAnimating];            
             });
-        } else {
-            NSLog(@"This photo request is out of date.  Disregard.");
-        }
+        } 
     });
     dispatch_release(downloadQueue);
     
