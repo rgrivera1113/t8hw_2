@@ -64,6 +64,15 @@
     return YES;
 }
 
+- (NSDictionary*) displayedPhoto {
+    
+    if (self.tableView.indexPathForSelectedRow)
+        return [self displayedPhoto:self.tableView.indexPathForSelectedRow];
+    else
+        return nil;
+    
+}
+
 - (id<SplitViewPresenter>) splitViewPhotoDetail {
     
     id photoVC = [self.splitViewController.viewControllers lastObject];
@@ -89,6 +98,7 @@
         
         // Set the photo to be shown.
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
+        [(PhotoViewerVC*) segue.destinationViewController setPhotoDelegate:self];
         [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
         [(PhotoViewerVC*) segue.destinationViewController setTitle:[[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
         // Move the popover bar button item to new view.

@@ -25,6 +25,12 @@
     
 }
 
+- (NSDictionary*) displayedPhoto: (NSIndexPath*) atIndex {
+    
+    return [self.photoList objectAtIndex:atIndex.row];
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.

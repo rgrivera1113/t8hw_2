@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoListVC.h"
+#import "PhotoViewerDataSource.h"
 
-@interface RecentPhotoListVC : PhotoListVC <UITableViewDataSource,UITableViewDelegate>
+@interface RecentPhotoListVC : PhotoListVC <UITableViewDataSource,UITableViewDelegate,PhotoViewerDataSource>
 
 @property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
+
+-(NSDictionary*) displayedPhoto;
 
 @end

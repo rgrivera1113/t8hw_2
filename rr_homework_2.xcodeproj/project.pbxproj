@@ -25,8 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		344E1A9D157FB2B400C6F1DF /* PhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PhotoListVC.h; sourceTree = "<group>"; };
+		344E1A9D157FB2B400C6F1DF /* PhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListVC.h; sourceTree = "<group>"; };
 		344E1A9E157FB2B400C6F1DF /* PhotoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoListVC.m; sourceTree = "<group>"; };
+		345D858C1580FFD400B59684 /* PhotoViewerDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoViewerDataSource.h; sourceTree = "<group>"; };
 		34A562CF15797226003A8323 /* RecentPhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotoListVC.h; sourceTree = "<group>"; };
 		34A562D015797226003A8323 /* RecentPhotoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotoListVC.m; sourceTree = "<group>"; };
 		34A562D6157D036E003A8323 /* PhotoViewerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerVC.h; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 				34FD548515780A9F00357BE7 /* FlickrAPIKey.h */,
 				34FD548615780A9F00357BE7 /* FlickrFetcher.h */,
 				34FD548715780A9F00357BE7 /* FlickrFetcher.m */,
+				345D858C1580FFD400B59684 /* PhotoViewerDataSource.h */,
 				34F0BD82157E9BD000B540D5 /* SplitViewPresenter.h */,
 				34F0BD86157EA0EC00B540D5 /* RotatingViewController.h */,
 				34F0BD87157EA0EC00B540D5 /* RotatingViewController.m */,

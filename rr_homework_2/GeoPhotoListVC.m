@@ -67,6 +67,17 @@
                                                                                action:@selector(refresh:)];
     }
 }
+
+- (NSDictionary*) displayedPhoto {
+    
+    if (self.tableView.indexPathForSelectedRow)
+        return [self displayedPhoto:self.tableView.indexPathForSelectedRow];
+    else
+        return nil;
+    
+}
+
+
 - (id<SplitViewPresenter>) splitViewPhotoDetail {
     
     id photoVC = [self.splitViewController.viewControllers lastObject];
@@ -74,7 +85,6 @@
         photoVC = nil;
     }
     return photoVC;
-    
     
 }
 
@@ -136,6 +146,7 @@
         
         // Set the photo to be shown.
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
+        [(PhotoViewerVC*) segue.destinationViewController setPhotoDelegate:self];
         [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
         // Rename the popover in the rotation toolbar.
         id detailView = [self splitViewPhotoDetail];

@@ -12,4 +12,6 @@
 
 @property (nonatomic,strong) NSArray* photoList;
 
+- (NSDictionary*) displayedPhoto: (NSIndexPath*) atIndex;
+
 @end

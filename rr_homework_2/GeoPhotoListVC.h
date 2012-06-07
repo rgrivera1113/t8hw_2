@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoListVC.h"
+#import "PhotoViewerDataSource.h"
 
-@interface GeoPhotoListVC : PhotoListVC <UITableViewDelegate,UITableViewDataSource>
+@interface GeoPhotoListVC : PhotoListVC <UITableViewDelegate,UITableViewDataSource,PhotoViewerDataSource>
 
-//@property (nonatomic,strong) NSArray* photoList;
 @property (nonatomic,strong) NSDictionary* photoLocation;
 @property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
 
+- (NSDictionary*) displayedPhoto;
 
 @end
