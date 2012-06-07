@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define MAX_CACHE_SIZE 10000000
+
+
 @interface FlickrCacher : NSObject
 
 + (void) sendPhotoToCache: (NSData*) photo as: (NSString*) photoName;
