@@ -13,7 +13,4 @@
 
 @interface PhotoViewerVC : ImageViewerVC <UIScrollViewDelegate, SplitViewPresenter>
 
-//@property (nonatomic,strong) NSDictionary* photo;
-//@property (nonatomic,weak) id<PhotoViewerDataSource> photoDelegate;
-
 @end
