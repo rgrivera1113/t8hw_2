@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SplitViewPresenter.h"
 #import "PhotoViewerDataSource.h"
+#import "ImageViewerVC.h"
 
-@interface PhotoViewerVC : UIViewController <UIScrollViewDelegate, SplitViewPresenter>
+@interface PhotoViewerVC : ImageViewerVC <UIScrollViewDelegate, SplitViewPresenter>
 
 @property (nonatomic,strong) NSDictionary* photo;
 @property (nonatomic,weak) id<PhotoViewerDataSource> photoDelegate;

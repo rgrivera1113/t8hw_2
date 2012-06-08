@@ -18,7 +18,6 @@
 @property (nonatomic,weak) IBOutlet UIImageView* photoView;
 @property (nonatomic,weak) IBOutlet UIToolbar* rotationBar;
 @property (nonatomic,weak) IBOutlet UIBarButtonItem* photoTitle;
-@property (nonatomic,weak) IBOutlet UIActivityIndicatorView* loadingIndicator;
 
 @end
 
@@ -30,7 +29,6 @@
 @synthesize rotationBar = _rotationBar;
 @synthesize splitViewBarButtonItem = _splitViewBarButtonItem;
 @synthesize photoTitle = _photoTitle;
-@synthesize loadingIndicator = _loadingIndicator;
 @synthesize photoDelegate = _photoDelegate;
 
 # pragma mark <splitviewpresenter> implementation
@@ -62,23 +60,6 @@
     
     if (_photo != photo)
         _photo = photo;
-}
-
-- (UIActivityIndicatorView*) loadingIndicator {
-    
-    if (!_loadingIndicator)
-        self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    
-    return _loadingIndicator;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
@@ -119,10 +100,8 @@
     self.navigationItem.title = photoTitle;
 
     // Start the activity indicator before kicking off the load block.
-    self.loadingIndicator.color = [UIColor blackColor];
-    self.loadingIndicator.hidesWhenStopped = YES;
-    [self.loadingIndicator startAnimating];
-    
+    [self animateLoadingIndicator:YES];
+
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
 
@@ -135,7 +114,7 @@
         if (![self.photoDelegate displayedPhoto]) {
         
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.loadingIndicator stopAnimating];            
+                [self animateLoadingIndicator:NO];
             });
             
         }
@@ -155,7 +134,7 @@
                                                         self.photoScroll.contentSize.width, 
                                                         self.photoScroll.contentSize.height) 
                                     animated:NO];
-                [self.loadingIndicator stopAnimating];            
+                [self animateLoadingIndicator:NO];
             });
         } 
     });

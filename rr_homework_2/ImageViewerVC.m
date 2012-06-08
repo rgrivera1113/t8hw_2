@@ -94,25 +94,16 @@
 
 - (UIActivityIndicatorView*) loadingIndicator {
     
-    if (!_loadingIndicator) {
+    if (!_loadingIndicator) 
         self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        _loadingIndicator.color = [UIColor blackColor];
-        _loadingIndicator.hidesWhenStopped = YES;
+    
+    _loadingIndicator.color = [UIColor blackColor];
+    _loadingIndicator.hidesWhenStopped = YES;
         
-    }
     
     return _loadingIndicator;
 }
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
