@@ -100,7 +100,6 @@
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
         [(PhotoViewerVC*) segue.destinationViewController setPhotoDelegate:self];
         [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
-        [(PhotoViewerVC*) segue.destinationViewController setTitle:[[self.photoList objectAtIndex:selected.row] valueForKey:FLICKR_PHOTO_TITLE]];
         // Move the popover bar button item to new view.
         id detailView = [self splitViewPhotoDetail];
         if (detailView) {
