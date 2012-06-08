@@ -11,11 +11,14 @@
 #import "FlickrFetcher.h"
 @interface PhotoListVC ()
 
+@property (nonatomic,weak) IBOutlet UISegmentedControl* chooser;
+
 @end
 
 @implementation PhotoListVC
 
 @synthesize photoList = _photoList;
+@synthesize chooser = _chooser;
 
 
 - (void) setPhotoList:(NSArray *)photoList {
