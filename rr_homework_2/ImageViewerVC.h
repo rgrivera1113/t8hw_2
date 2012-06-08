@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "PhotoViewerDataSource.h"
 #import "SplitViewPresenter.h"
+#import "RotatingViewController.h"
 
-@interface ImageViewerVC : UIViewController <SplitViewPresenter>
+@interface ImageViewerVC : RotatingViewController <SplitViewPresenter>
 
 @property (nonatomic,strong) NSDictionary* photo;
 @property (nonatomic,weak) id<PhotoViewerDataSource> photoDelegate;
 
-- (void) refreshSplitViewButton;
-- (NSString*) updatePhotoTitle;
+- (NSString*) refreshSplitView;
 - (void) animateLoadingIndicator: (BOOL) setting;
 
 @end

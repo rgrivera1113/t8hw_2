@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *splitViewBarButtonItem;
 
-- (void) refreshSplitViewButton;
-- (NSString*) updatePhotoTitle;
+@optional
+- (NSString*) refreshSplitView;
 
 @end

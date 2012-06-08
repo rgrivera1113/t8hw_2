@@ -47,16 +47,15 @@
 
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
+    if (splitViewBarButtonItem != _splitViewBarButtonItem)
         [self handlePopoverBarButton:splitViewBarButtonItem];
 }
 
-- (void) refreshSplitViewButton {
+- (NSString*) refreshSplitView {
     
-    if (!_splitViewBarButtonItem)
-        self.splitViewBarButtonItem = [[UIBarButtonItem alloc] init];
+    [self handlePopoverBarButton:self.splitViewBarButtonItem];
     
-    [self setSplitViewBarButtonItem:_splitViewBarButtonItem];
-    
+    return [self updatePhotoTitle];
 }
 
 - (void) animateLoadingIndicator: (BOOL) setting {
