@@ -40,17 +40,8 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="3Fe-oG-XFW"/>
                                 </items>
                             </toolbar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="CXL-B3-JTp">
-                                <rect key="frame" x="0.0" y="44" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="World"/>
-                                    <segment title="Photo"/>
-                                </segments>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LjH-J8-uny">
-                                <rect key="frame" x="0.0" y="73" width="320" height="710"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="739"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -77,7 +68,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="zJl-T7-1PB"/>
                     <connections>
-                        <outlet property="chooser" destination="CXL-B3-JTp" id="ZOa-V7-kjF"/>
                         <outlet property="tableView" destination="LjH-J8-uny" id="Yhz-ag-naZ"/>
                         <segue destination="MzQ-V0-TPr" kind="replace" splitViewControllerTargetIndex="1" id="w0p-He-Oap"/>
                     </connections>
@@ -94,17 +84,8 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="shA-mP-4hX">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="World"/>
-                                    <segment title="Photo"/>
-                                </segments>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="cMb-Fm-KCC">
-                                <rect key="frame" x="0.0" y="29" width="320" height="710"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="739"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -210,6 +191,17 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="oOS-6G-g7e"/>
                                     <barButtonItem title="Item" style="plain" id="A4A-Pb-X8G"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="BhL-Qr-ALz"/>
+                                    <barButtonItem style="plain" id="ZO5-eQ-aoS">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="xv6-lN-7XE">
+                                            <rect key="frame" x="554" y="7" width="207" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="List"/>
+                                                <segment title="Map"/>
+                                                <segment title="World"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" minimumZoomScale="0.20000000000000001" maximumZoomScale="3" id="LRg-Wo-I3U">
@@ -261,6 +253,17 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kqM-pG-MV5"/>
                                     <barButtonItem title="Item" style="plain" id="cBZ-NN-sGk"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="VfP-cR-h45"/>
+                                    <barButtonItem style="plain" id="wiB-cs-mc7">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="GEu-qn-QLL">
+                                            <rect key="frame" x="554" y="7" width="207" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="List"/>
+                                                <segment title="Map"/>
+                                                <segment title="World"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="Oz6-4m-hDK">
@@ -294,17 +297,8 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Bnl-dr-d71">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="World"/>
-                                    <segment title="Photo"/>
-                                </segments>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Jfu-0a-T8I">
-                                <rect key="frame" x="0.0" y="29" width="320" height="710"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="739"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -351,7 +345,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="chooser" destination="Bnl-dr-d71" id="FJd-cz-AMZ"/>
                         <outlet property="refreshButton" destination="pJF-YO-eTm" id="iKA-UY-NYj"/>
                         <outlet property="tableView" destination="Jfu-0a-T8I" id="885-Qk-8M2"/>
                         <segue destination="1JT-DH-LiF" kind="replace" identifier="PresentGeoImage" splitViewControllerTargetIndex="1" id="dIc-9C-UIZ"/>
@@ -362,13 +355,67 @@
             <point key="canvasLocation" x="4525" y="-5023"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="GeoPhotoListVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoPhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ImageViewerVC" superclassName="RotatingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="photoTitle" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="rotationBar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="splitViewBarButtonItem" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="MapViewerVC" superclassName="ImageViewerVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="PhotoListVC" superclassName="RotatingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="chooser" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="PhotoViewerVC" superclassName="ImageViewerVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="photoScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="splitViewBarButtonItem" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="PlacesVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RecentPhotoListVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RotatingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RotatingViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="zqf-C9-GP1"/>
-        <segue reference="dIc-9C-UIZ"/>
+        <segue reference="JXJ-9A-YpL"/>
+        <segue reference="w0p-He-Oap"/>
     </inferredMetricsTieBreakers>
 </document>
