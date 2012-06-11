@@ -20,7 +20,7 @@
 @implementation PlacesVC
 
 @synthesize locationList = _locationList;
-@synthesize refreshButton = _refreshButton;
+//@synthesize refreshButton = _refreshButton;
 @synthesize tableView = _tableView;
 
 - (IBAction)refresh:(id)sender
@@ -65,20 +65,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    id detailView = [self splitViewPhotoDetail];
-    if (detailView) {
-        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
-        if (button) {
-            button.title = self.navigationItem.title;
-        }
-    }
-
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -89,14 +75,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // Rename the popover in the rotation toolbar.
-    id detailView = [self splitViewPhotoDetail];
-    if (detailView) {
-        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
-        if (button) {
-            button.title = self.navigationItem.title;
-        }
-    }
     [self refresh:self.refreshButton];
 
 }
@@ -124,17 +102,6 @@
     } else {
         return YES;
     }
-}
-
-- (id<SplitViewPresenter>) splitViewPhotoDetail {
-    
-    id photoVC = [self.splitViewController.viewControllers lastObject];
-    if (![photoVC conformsToProtocol:@protocol(SplitViewPresenter)]) {
-        photoVC = nil;
-    }
-    return photoVC;
-    
-    
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

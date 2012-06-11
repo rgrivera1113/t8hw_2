@@ -19,6 +19,46 @@
 
 @synthesize photoList = _photoList;
 @synthesize chooser = _chooser;
+@synthesize refreshButton = _refreshButton;
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    id detailView = [self splitViewPhotoDetail];
+    if (detailView) {
+        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+        if (button) {
+            button.title = self.navigationItem.title;
+        }
+    }
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    id detailView = [self splitViewPhotoDetail];
+    if (detailView) {
+        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+        if (button) {
+            button.title = self.navigationItem.title;
+        }
+    }
+    
+    
+}
+
+- (id<SplitViewPresenter>) splitViewPhotoDetail {
+    
+    id photoVC = [self.splitViewController.viewControllers lastObject];
+    if (![photoVC conformsToProtocol:@protocol(SplitViewPresenter)]) {
+        photoVC = nil;
+    }
+    return photoVC;
+    
+    
+}
 
 
 - (void) setPhotoList:(NSArray *)photoList {
