@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RotatingViewController.h"
+#import "PhotoListVC.h"
 
-@interface PlacesVC : RotatingViewController <UISplitViewControllerDelegate, 
+@interface PlacesVC : PhotoListVC <UISplitViewControllerDelegate, 
                                                 UITableViewDelegate,
                                                 UITableViewDataSource>
 

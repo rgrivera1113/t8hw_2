@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RotatingViewController.h"
 
-@interface PhotoListVC : UIViewController <UITableViewDelegate,UITableViewDataSource>
+@interface PhotoListVC : RotatingViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray* photoList;
 
