@@ -13,7 +13,6 @@
 @interface GeoPhotoListVC : PhotoListVC <UITableViewDelegate,UITableViewDataSource,PhotoViewerDataSource>
 
 @property (nonatomic,strong) NSDictionary* photoLocation;
-@property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
 
 - (NSDictionary*) displayedPhoto;
 

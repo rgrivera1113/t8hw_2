@@ -20,7 +20,6 @@
 @implementation PlacesVC
 
 @synthesize locationList = _locationList;
-//@synthesize refreshButton = _refreshButton;
 @synthesize tableView = _tableView;
 
 - (IBAction)refresh:(id)sender

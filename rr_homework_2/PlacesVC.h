@@ -14,6 +14,5 @@
                                                 UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray* locationList;
-//@property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
 
 @end

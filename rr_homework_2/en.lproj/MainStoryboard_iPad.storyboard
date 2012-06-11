@@ -343,9 +343,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="J8v-Jx-Jpg"/>
+                    <navigationItem key="navigationItem" id="J8v-Jx-Jpg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="pJF-YO-eTm">
+                            <connections>
+                                <action selector="refresh:" destination="aUs-5g-T63" id="5oz-aO-B5u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chooser" destination="Bnl-dr-d71" id="FJd-cz-AMZ"/>
+                        <outlet property="refreshButton" destination="pJF-YO-eTm" id="iKA-UY-NYj"/>
                         <outlet property="tableView" destination="Jfu-0a-T8I" id="885-Qk-8M2"/>
                         <segue destination="1JT-DH-LiF" kind="replace" identifier="PresentGeoImage" splitViewControllerTargetIndex="1" id="dIc-9C-UIZ"/>
                         <segue destination="MzQ-V0-TPr" kind="replace" splitViewControllerTargetIndex="1" id="zqf-C9-GP1"/>

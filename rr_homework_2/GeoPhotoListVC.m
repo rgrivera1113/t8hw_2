@@ -20,7 +20,6 @@
 
 @implementation GeoPhotoListVC
 
-@synthesize refreshButton = _refreshButton;
 @synthesize photoLocation = _photoLocation;
 @synthesize tableView = _tableView;
 
@@ -55,19 +54,6 @@
     
 }
 
-- (void) setRefreshButton: (UIBarButtonItem*) button{
-    
-    if (_refreshButton != button) {
-    
-        _refreshButton = button;
-        
-        if (!_refreshButton)
-            self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
-                                                                               target:self 
-                                                                               action:@selector(refresh:)];
-    }
-}
-
 - (NSDictionary*) displayedPhoto {
     
     if (self.tableView.indexPathForSelectedRow)
@@ -85,29 +71,6 @@
         photoVC = nil;
     }
     return photoVC;
-    
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
-                                                                       target:self 
-                                                                       action:@selector(refresh:)];
-    self.navigationItem.rightBarButtonItem = self.refreshButton;
-    self.navigationItem.title = [self.photoLocation objectForKey:FLICKR_PLACE_NAME];
-    
-    // Rename the popover in the rotation toolbar.
-    id detailView = [self splitViewPhotoDetail];
-    if (detailView) {
-        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
-        if (button) {
-            button.title = self.navigationItem.title;
-        }
-    }
     
 }
 
