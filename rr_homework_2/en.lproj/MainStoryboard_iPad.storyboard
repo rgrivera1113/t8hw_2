@@ -366,6 +366,7 @@
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="photoTitle" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="rotationBar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="splitViewBarButtonItem" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="PhotoListVC" superclassName="RotatingViewController">
@@ -409,6 +410,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ps5-H6-GVL"/>
+        <segue reference="xr1-ug-f3m"/>
     </inferredMetricsTieBreakers>
 </document>
