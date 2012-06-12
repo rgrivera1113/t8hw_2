@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "PhotoListVC.h"
 #import "PhotoViewerDataSource.h"
 
-@interface RecentPhotoListVC : PhotoListVC <UITableViewDataSource,UITableViewDelegate,PhotoViewerDataSource>
+@interface RecentPhotoListVC : PhotoListVC <UITableViewDataSource,UITableViewDelegate,PhotoViewerDataSource,MKMapViewDelegate>
 
-@property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
+@property (nonatomic,weak) IBOutlet UIBarButtonItem* refreshButton;
 
 -(NSDictionary*) displayedPhoto;
 

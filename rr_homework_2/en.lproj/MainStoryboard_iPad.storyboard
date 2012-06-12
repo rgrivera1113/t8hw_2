@@ -65,18 +65,31 @@
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="VaF-mN-Uaf">
                                 <rect key="frame" x="0.0" y="44" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="List"/>
                                     <segment title="Map"/>
                                 </segments>
+                                <connections>
+                                    <action selector="presentSubView:" destination="vzj-9R-yjj" eventType="valueChanged" id="PAl-0E-RSQ"/>
+                                </connections>
                             </segmentedControl>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="R5i-Mz-N1v">
+                                <rect key="frame" x="0.0" y="73" width="320" height="710"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vzj-9R-yjj" id="btv-h7-c1B"/>
+                                </connections>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="zJl-T7-1PB"/>
                     <connections>
+                        <outlet property="chooser" destination="VaF-mN-Uaf" id="Lp9-7J-QgL"/>
+                        <outlet property="mapView" destination="R5i-Mz-N1v" id="Yec-zu-Qfj"/>
                         <outlet property="tableView" destination="LjH-J8-uny" id="Yhz-ag-naZ"/>
+                        <outlet property="view" destination="EU0-gk-aAz" id="k7a-El-baW"/>
                     </connections>
                 </viewController>
             </objects>
@@ -341,12 +354,63 @@
             <point key="canvasLocation" x="4525" y="-5023"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="GeoPhotoListVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GeoPhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ImageViewerVC" superclassName="RotatingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="photoTitle" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="rotationBar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="PhotoListVC" superclassName="RotatingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="chooser" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="PhotoViewerVC" superclassName="ImageViewerVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewerVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="photoScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="splitViewBarButtonItem" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="PlacesVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlacesVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="rootView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RecentPhotoListVC" superclassName="PhotoListVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotoListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="refreshButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RotatingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RotatingViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="dIc-9C-UIZ"/>
+        <segue reference="JXJ-9A-YpL"/>
     </inferredMetricsTieBreakers>
 </document>
