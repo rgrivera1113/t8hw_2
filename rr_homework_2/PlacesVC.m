@@ -10,17 +10,21 @@
 #import "FlickrFetcher.h"
 #import "GeoPhotoListVC.h"
 #import "SplitViewPresenter.h"
+#import "LocationAnnotation.h"
 
 @interface PlacesVC ()
 
 @property (nonatomic,weak) IBOutlet UITableView* tableView;
+@property (nonatomic,weak) IBOutlet MKMapView* mapView;
+@property (nonatomic,weak) IBOutlet UIView* rootView;
 
 @end
 
 @implementation PlacesVC
 
-//@synthesize locationList = _locationList;
 @synthesize tableView = _tableView;
+@synthesize mapView = _mapView;
+@synthesize rootView = _rootView;
 
 - (IBAction)refresh:(id)sender
 {
@@ -42,14 +46,29 @@
     dispatch_release(downloadQueue);
 }
 
+- (void) updateMapData {
+    
+    // use the photolist to update the mapview annotations.
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:[self.photoList count]];
+    for (NSDictionary *photo in self.photoList) {
+        [annotations addObject:[LocationAnnotation annotationForLocation:photo]];
+    }
+    
+    if (self.mapView.annotations) 
+        [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    if (annotations) 
+        [self.mapView addAnnotations:annotations];
+
+    
+}
 
 - (void) setPhotoList:(NSArray *)photoList {
     
     if (self.photoList != photoList) {
         [super setPhotoList:photoList];
-        
-        if (self.tableView.window) 
-            [self.tableView reloadData];
+        [self.tableView reloadData];
+        [self updateMapData];
     }
     
 }
@@ -62,6 +81,11 @@
 }
 
 #pragma mark - View lifecycle
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    self.mapView.delegate = self;
+}
+
 
 - (void)viewDidUnload
 {
@@ -102,6 +126,20 @@
     }
 }
 
+- (IBAction)presentSubView:(id)sender {
+    
+    if (self.chooser.selectedSegmentIndex == 0) {
+        
+        [self.view bringSubviewToFront:self.tableView];
+        
+    } else if (self.chooser.selectedSegmentIndex == 1) {
+        
+        [self.view bringSubviewToFront:self.mapView];
+        
+    }
+    
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"PresentGeoPhotoList"]) {
@@ -115,16 +153,6 @@
 }
 
 #pragma mark - Table Datasource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.photoList.count;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -148,5 +176,32 @@
     return cell;
     
 }
+
+#pragma mark - Map View Delegate
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    MKAnnotationView *aView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MapVC"];
+    if (!aView) {
+        aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapVC"];
+        aView.canShowCallout = YES;
+        aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        // could put a rightCalloutAccessoryView here
+    }
+    
+    aView.annotation = annotation;
+    [(UIImageView *)aView.leftCalloutAccessoryView setImage:nil];
+    
+    return aView;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)aView
+{
+    NSLog(@"An annotation was selected.");
+    //UIImage *image = [self.delegate mapViewController:self imageForAnnotation:aView.annotation];
+    //[(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
+}
+
+
+
 
 @end

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoListVC.h"
+#import <MapKit/MapKit.h>
 
-@interface PlacesVC : PhotoListVC <UITableViewDelegate, UITableViewDataSource>
+@interface PlacesVC : PhotoListVC <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
 
 
 @end
