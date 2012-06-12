@@ -119,7 +119,7 @@
     [self presentSubView:self];
     [self refresh:self.refreshButton];
     
-    
+    self.navigationItem.title = [self.photoLocation valueForKey:FLICKR_PLACE_NAME];
     // Rename the popover in the rotation toolbar.
     id detailView = [self splitViewPhotoDetail];
     if (detailView) {

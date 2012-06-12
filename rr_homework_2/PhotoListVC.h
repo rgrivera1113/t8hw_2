@@ -12,7 +12,8 @@
 @interface PhotoListVC : RotatingViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray* photoList;
-@property (nonatomic,strong) IBOutlet UIBarButtonItem* refreshButton;
+@property (nonatomic,weak) IBOutlet UIBarButtonItem* refreshButton;
+@property (nonatomic,weak) IBOutlet UISegmentedControl* chooser;
 
 - (NSDictionary*) displayedPhoto: (NSIndexPath*) atIndex;
 

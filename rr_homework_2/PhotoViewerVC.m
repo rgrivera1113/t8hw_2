@@ -58,14 +58,19 @@
         if (!requestedImage)
             requestedImage = [NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatOriginal]];
 
-        if (![self.photoDelegate displayedPhoto]) {
+        NSDictionary* displayedImage = [self.photoDelegate displayedPhoto];
+        
+        //if (![self.photoDelegate displayedPhoto]) {
+        if (!displayedImage) {
         
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self animateLoadingIndicator:NO];
             });
             
         }
-        else if (self.photo == [self.photoDelegate displayedPhoto]) {
+        else if (self.photo == displayedImage) {
+
+        //else if (self.photo == [self.photoDelegate displayedPhoto]) {
             
             // Only cache the image if it is still selected.
             dispatch_queue_t cacheWriter = dispatch_queue_create("cache writer", NULL);

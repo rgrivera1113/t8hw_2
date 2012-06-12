@@ -11,8 +11,6 @@
 #import "FlickrFetcher.h"
 @interface PhotoListVC ()
 
-@property (nonatomic,weak) IBOutlet UISegmentedControl* chooser;
-
 @end
 
 @implementation PhotoListVC
