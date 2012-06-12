@@ -144,9 +144,19 @@
     
     if ([segue.identifier isEqualToString:@"PresentGeoPhotoList"]) {
         
-        NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
-        [(GeoPhotoListVC*) segue.destinationViewController 
-         setPhotoLocation:[self.photoList objectAtIndex:selected.row]];
+        NSDictionary* location;
+        if ([sender isKindOfClass:[LocationAnnotation class]]) {
+            
+            location = [(LocationAnnotation*) sender location];
+            
+        } else {
+            
+            NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
+            location = [self.photoList objectAtIndex:selected.row];
+        }
+        
+        [(GeoPhotoListVC*) segue.destinationViewController setPhotoLocation:location];
+        
     }
     
     
@@ -184,21 +194,18 @@
     if (!aView) {
         aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapVC"];
         aView.canShowCallout = YES;
-        aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        // could put a rightCalloutAccessoryView here
+        aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     
     aView.annotation = annotation;
-    [(UIImageView *)aView.leftCalloutAccessoryView setImage:nil];
     
     return aView;
 }
 
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)aView
-{
-    NSLog(@"An annotation was selected.");
-    //UIImage *image = [self.delegate mapViewController:self imageForAnnotation:aView.annotation];
-    //[(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    
+    [self performSegueWithIdentifier:@"PresentGeoPhotoList" sender:view.annotation];
+    
 }
 
 
