@@ -9,10 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PhotoListVC.h"
 
-@interface PlacesVC : PhotoListVC <UISplitViewControllerDelegate, 
-                                                UITableViewDelegate,
-                                                UITableViewDataSource>
+@interface PlacesVC : PhotoListVC <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic,strong) NSArray* locationList;
 
 @end

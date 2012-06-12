@@ -19,7 +19,7 @@
 
 @implementation PlacesVC
 
-@synthesize locationList = _locationList;
+//@synthesize locationList = _locationList;
 @synthesize tableView = _tableView;
 
 - (IBAction)refresh:(id)sender
@@ -43,11 +43,10 @@
 }
 
 
-- (void) setPhotoList:(NSArray *)locationList {
+- (void) setPhotoList:(NSArray *)photoList {
     
-    if (_locationList != locationList) {
-        
-        _locationList = locationList;
+    if (self.photoList != photoList) {
+        [super setPhotoList:photoList];
         
         if (self.tableView.window) 
             [self.tableView reloadData];
@@ -109,7 +108,7 @@
         
         NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
         [(GeoPhotoListVC*) segue.destinationViewController 
-         setPhotoLocation:[self.locationList objectAtIndex:selected.row]];
+         setPhotoLocation:[self.photoList objectAtIndex:selected.row]];
     }
     
     
@@ -124,7 +123,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.locationList.count;
+    return self.photoList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -137,7 +136,7 @@
     }
     
     // Configure the cell...
-    NSDictionary *location = [self.locationList objectAtIndex:indexPath.row];
+    NSDictionary *location = [self.photoList objectAtIndex:indexPath.row];
     NSString* fullLocation = [location objectForKey:FLICKR_PLACE_NAME];
     NSArray* splitLocation = [fullLocation componentsSeparatedByString:@", "];
     cell.textLabel.text = [splitLocation objectAtIndex:0];
