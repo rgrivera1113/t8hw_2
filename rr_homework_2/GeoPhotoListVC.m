@@ -179,8 +179,6 @@
             
         }
         
-            
-            
         // Rename the popover in the rotation toolbar.
         id detailView = [self splitViewPhotoDetail];
         if (detailView) {
@@ -243,6 +241,7 @@
     dispatch_release(saveRecentQueue);
 }
 
+
 #pragma mark - Map View Delegate
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -283,8 +282,48 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     
-    [self performSegueWithIdentifier:@"PresentGeoImage" sender:view.annotation];
-    
+    dispatch_queue_t saveRecentQueue = dispatch_queue_create("save recent", NULL);
+    dispatch_async(saveRecentQueue, ^{
+        
+        NSFileManager* fm = [NSFileManager defaultManager];
+        NSArray* directory = [fm URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+        NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"recent.plist" isDirectory:NO];
+        
+        NSMutableArray* recentCollection = [[[NSArray alloc] initWithContentsOfURL:filePath] mutableCopy];
+        NSString* photoCandidate = [[(ImageAnnotations*) view.annotation photo]  objectForKey:FLICKR_PHOTO_ID];
+        BOOL exists = NO;
+        
+        NSString* pid;
+        for (NSDictionary* photo in recentCollection) {
+            pid = [photo objectForKey:FLICKR_PHOTO_ID];
+            if ([photoCandidate isEqualToString:pid]) {
+                exists = YES;
+                break;
+            }
+        }
+        
+        if (!exists) {
+            if (recentCollection == nil) {
+                recentCollection = [[NSMutableArray alloc] initWithCapacity:20];
+                [recentCollection insertObject:[(ImageAnnotations*) view.annotation photo] atIndex:0];
+            } else if (recentCollection.count < 20) {
+                [recentCollection insertObject:[(ImageAnnotations*) view.annotation photo] atIndex:0];
+            } else {
+                [recentCollection removeLastObject];
+                [recentCollection insertObject:[(ImageAnnotations*) view.annotation photo] atIndex:0];
+            }
+            
+            // Save the array back to the file.
+            [[recentCollection copy] writeToURL:filePath atomically:YES];
+        }
+        // Once the work is done, move on with the segue.
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"PresentGeoImage" sender:view.annotation];
+        });
+        
+    });
+    dispatch_release(saveRecentQueue);
+     
 }
 
 
