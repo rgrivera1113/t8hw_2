@@ -14,6 +14,7 @@
 		34A562D8157D036E003A8323 /* PhotoViewerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562D7157D036E003A8323 /* PhotoViewerVC.m */; };
 		34BE111F15868CE500624ACC /* ImageViewerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BE111E15868CE500624ACC /* ImageViewerVC.m */; };
 		34BE11231586962300624ACC /* MapViewerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BE11221586962300624ACC /* MapViewerVC.m */; };
+		34BE112615869F8000624ACC /* ImageAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BE112515869F8000624ACC /* ImageAnnotations.m */; };
 		34F0BD88157EA0EC00B540D5 /* RotatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F0BD87157EA0EC00B540D5 /* RotatingViewController.m */; };
 		34FD54661578079C00357BE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD54651578079C00357BE7 /* UIKit.framework */; };
 		34FD54681578079C00357BE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD54671578079C00357BE7 /* Foundation.framework */; };
@@ -43,6 +44,8 @@
 		34BE111E15868CE500624ACC /* ImageViewerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerVC.m; sourceTree = "<group>"; };
 		34BE11211586962300624ACC /* MapViewerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewerVC.h; sourceTree = "<group>"; };
 		34BE11221586962300624ACC /* MapViewerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewerVC.m; sourceTree = "<group>"; };
+		34BE112415869F8000624ACC /* ImageAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnnotations.h; sourceTree = "<group>"; };
+		34BE112515869F8000624ACC /* ImageAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAnnotations.m; sourceTree = "<group>"; };
 		34F0BD82157E9BD000B540D5 /* SplitViewPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewPresenter.h; sourceTree = "<group>"; };
 		34F0BD86157EA0EC00B540D5 /* RotatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotatingViewController.h; sourceTree = "<group>"; };
 		34F0BD87157EA0EC00B540D5 /* RotatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotatingViewController.m; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 				34BE111E15868CE500624ACC /* ImageViewerVC.m */,
 				34BE11211586962300624ACC /* MapViewerVC.h */,
 				34BE11221586962300624ACC /* MapViewerVC.m */,
+				34BE112415869F8000624ACC /* ImageAnnotations.h */,
+				34BE112515869F8000624ACC /* ImageAnnotations.m */,
 				34FD54741578079C00357BE7 /* AppDelegate.h */,
 				34FD54751578079C00357BE7 /* AppDelegate.m */,
 				34FD54771578079C00357BE7 /* MainStoryboard_iPhone.storyboard */,
@@ -231,6 +236,7 @@
 				345D858F15810B2E00B59684 /* FlickrCacher.m in Sources */,
 				34BE111F15868CE500624ACC /* ImageViewerVC.m in Sources */,
 				34BE11231586962300624ACC /* MapViewerVC.m in Sources */,
+				34BE112615869F8000624ACC /* ImageAnnotations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
