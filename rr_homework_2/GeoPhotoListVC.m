@@ -14,6 +14,7 @@
 @interface GeoPhotoListVC ()
 
 @property (nonatomic,weak) IBOutlet UITableView* tableView;
+@property (nonatomic,weak) IBOutlet MKMapView* mapView;
 
 
 @end
@@ -22,6 +23,7 @@
 
 @synthesize photoLocation = _photoLocation;
 @synthesize tableView = _tableView;
+@synthesize mapView = _mapView;
 
 #pragma mark - View lifecycle
 
@@ -45,6 +47,22 @@
     dispatch_release(downloadQueue);
 }
 
+- (void) updateMapData {
+    
+    // use the photolist to update the mapview annotations.
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:[self.photoList count]];
+    for (NSDictionary *photo in self.photoList) {
+        [annotations addObject:[ImageAnnotations annotationForPhoto:photo]];
+    }
+    
+    if (self.mapView.annotations) 
+        [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    if (annotations) 
+        [self.mapView addAnnotations:annotations];
+    
+    
+}
 
 - (void) setPhotoList:(NSArray *)photoList {
     
@@ -52,12 +70,16 @@
     if (self.tableView.window) 
         [self.tableView reloadData];
     
+    [self updateMapData];
+    
 }
 
 - (NSDictionary*) displayedPhoto {
     
     if (self.tableView.indexPathForSelectedRow)
         return [self displayedPhoto:self.tableView.indexPathForSelectedRow];
+    else if ([self.mapView selectedAnnotations])
+        return [[[self.mapView selectedAnnotations] objectAtIndex:0] photo];
     else
         return nil;
     
@@ -84,7 +106,28 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    // Set up map coordinates.
+    double latitude = [[self.photoLocation valueForKey:FLICKR_LATITUDE]doubleValue];
+    double longitude = [[self.photoLocation valueForKey:FLICKR_LONGITUDE]doubleValue];
+    
+    CLLocationCoordinate2D startCoord = CLLocationCoordinate2DMake(latitude, longitude);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:MKCoordinateRegionMakeWithDistance(startCoord, 10000, 10000)];
+    [self.mapView setRegion:adjustedRegion animated:YES];
+    
+    
+    
+    [self presentSubView:self];
     [self refresh:self.refreshButton];
+    
+    
+    // Rename the popover in the rotation toolbar.
+    id detailView = [self splitViewPhotoDetail];
+    if (detailView) {
+        UIBarButtonItem* button = [detailView splitViewBarButtonItem];
+        if (button) {
+            button.title = self.navigationItem.title;
+        }
+    }
 
 }
 
@@ -103,14 +146,41 @@
     }
 }
 
+- (IBAction)presentSubView:(id)sender {
+    
+    if (self.chooser.selectedSegmentIndex == 0) {
+        
+        [self.view bringSubviewToFront:self.tableView];
+        
+    } else if (self.chooser.selectedSegmentIndex == 1) {
+        
+        [self.view bringSubviewToFront:self.mapView];
+        
+    }
+    
+}
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"PresentGeoImage"]) {
         
-        // Set the photo to be shown.
-        NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
-        [(PhotoViewerVC*) segue.destinationViewController setPhotoDelegate:self];
-        [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
+        if ([sender isKindOfClass:[ImageAnnotations class]]) {
+            
+            [(PhotoViewerVC*) segue.destinationViewController setPhotoDelegate:self];
+            [(PhotoViewerVC*) segue.destinationViewController setPhoto:[(ImageAnnotations*) sender photo]];
+            
+        } else {
+            
+            // Set the photo to be shown.
+            NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
+            [(PhotoViewerVC*) segue.destinationViewController setPhotoDelegate:self];
+            [(PhotoViewerVC*) segue.destinationViewController setPhoto:[self.photoList objectAtIndex:selected.row]];
+            
+        }
+        
+            
+            
         // Rename the popover in the rotation toolbar.
         id detailView = [self splitViewPhotoDetail];
         if (detailView) {
@@ -172,5 +242,50 @@
     });
     dispatch_release(saveRecentQueue);
 }
+
+#pragma mark - Map View Delegate
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    
+    MKAnnotationView *aView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MapVC"];
+    if (!aView) {
+        aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapVC"];
+        aView.canShowCallout = YES;
+        aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    }
+    
+    aView.annotation = annotation;
+    [(UIImageView *)aView.leftCalloutAccessoryView setImage:nil];
+    
+    return aView;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)aView
+{
+
+    dispatch_queue_t thumbnailFetch = dispatch_queue_create("get thumbnail", NULL);
+    
+    dispatch_async(thumbnailFetch, ^{
+        ImageAnnotations *ia = (ImageAnnotations*)aView.annotation;
+        NSURL *url = [FlickrFetcher urlForPhoto:ia.photo format:FlickrPhotoFormatSquare];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:data];
+            [(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
+        });
+    });
+    dispatch_release(thumbnailFetch);
+
+    
+}
+
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    
+    [self performSegueWithIdentifier:@"PresentGeoImage" sender:view.annotation];
+    
+}
+
 
 @end

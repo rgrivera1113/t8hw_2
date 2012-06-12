@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "PhotoListVC.h"
 #import "PhotoViewerDataSource.h"
+#import "ImageAnnotations.h"
 
-@interface GeoPhotoListVC : PhotoListVC <UITableViewDelegate,UITableViewDataSource,PhotoViewerDataSource>
+@interface GeoPhotoListVC : PhotoListVC <UITableViewDelegate,UITableViewDataSource,PhotoViewerDataSource,MKMapViewDelegate>
 
 @property (nonatomic,strong) NSDictionary* photoLocation;
 
