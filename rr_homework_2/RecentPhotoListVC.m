@@ -162,6 +162,12 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self performSegueWithIdentifier:@"PresentRecentImage" sender:tableView];
+    
+}
+
 #pragma mark - Map View Delegate
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {

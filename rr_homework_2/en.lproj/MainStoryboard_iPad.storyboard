@@ -53,9 +53,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <connections>
-                                            <segue destination="1JT-DH-LiF" kind="replace" identifier="PresentRecentImage" splitViewControllerTargetIndex="1" id="JXJ-9A-YpL"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -90,6 +87,7 @@
                         <outlet property="mapView" destination="R5i-Mz-N1v" id="Yec-zu-Qfj"/>
                         <outlet property="tableView" destination="LjH-J8-uny" id="Yhz-ag-naZ"/>
                         <outlet property="view" destination="EU0-gk-aAz" id="k7a-El-baW"/>
+                        <segue destination="1JT-DH-LiF" kind="replace" identifier="PresentRecentImage" splitViewControllerTargetIndex="1" id="ps5-H6-GVL"/>
                     </connections>
                 </viewController>
             </objects>
@@ -411,6 +409,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="JXJ-9A-YpL"/>
+        <segue reference="ps5-H6-GVL"/>
     </inferredMetricsTieBreakers>
 </document>
