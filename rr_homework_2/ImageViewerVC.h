@@ -11,10 +11,12 @@
 #import "SplitViewPresenter.h"
 #import "RotatingViewController.h"
 
-@interface ImageViewerVC : RotatingViewController <SplitViewPresenter>
+@interface ImageViewerVC : RotatingViewController <SplitViewPresenter,UIScrollViewDelegate>
 
-@property (nonatomic,strong) NSDictionary* photo;
+@property (nonatomic,strong) id photo;
 @property (nonatomic,weak) id<PhotoViewerDataSource> photoDelegate;
+@property (nonatomic,weak) IBOutlet UIScrollView* photoScroll;
+@property (nonatomic,weak) IBOutlet UIImageView* photoView;
 
 - (NSString*) refreshSplitView;
 - (void) animateLoadingIndicator: (BOOL) setting;

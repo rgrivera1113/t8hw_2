@@ -14,15 +14,10 @@
 
 @interface PhotoViewerVC ()
 
-@property (nonatomic,weak) IBOutlet UIScrollView* photoScroll;
-@property (nonatomic,weak) IBOutlet UIImageView* photoView;
 
 @end
 
 @implementation PhotoViewerVC
-
-@synthesize photoScroll = _photoScroll;
-@synthesize photoView = _photoView;
 
 - (void)viewDidLoad
 {
@@ -60,7 +55,6 @@
 
         NSDictionary* displayedImage = [self.photoDelegate displayedPhoto];
         
-        //if (![self.photoDelegate displayedPhoto]) {
         if (!displayedImage) {
         
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -70,8 +64,6 @@
         }
         else if (self.photo == displayedImage) {
 
-        //else if (self.photo == [self.photoDelegate displayedPhoto]) {
-            
             // Only cache the image if it is still selected.
             dispatch_queue_t cacheWriter = dispatch_queue_create("cache writer", NULL);
             dispatch_async(cacheWriter, ^{
@@ -91,19 +83,6 @@
         } 
     });
     dispatch_release(downloadQueue);
-    
-}
-
-- (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    
-    return self.photoView;
-    
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    
-    CGSize scaledSize = CGSizeMake(self.photoView.image.size.width * self.photoScroll.zoomScale, self.photoView.image.size.height * self.photoScroll.zoomScale);
-    self.photoScroll.contentSize = scaledSize;
     
 }
 

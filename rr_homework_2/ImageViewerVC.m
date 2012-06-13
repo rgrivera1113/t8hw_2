@@ -25,6 +25,8 @@
 @synthesize rotationBar = _rotationBar;
 @synthesize photoTitle = _photoTitle;
 @synthesize loadingIndicator = _loadingIndicator;
+@synthesize photoScroll = _photoScroll;
+@synthesize photoView = _photoView;
 
 # pragma mark <splitviewpresenter> implementation
 - (void) handlePopoverBarButton: (UIBarButtonItem*) barButtonItem {
@@ -119,6 +121,19 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    
+    return self.photoView;
+    
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    
+    CGSize scaledSize = CGSizeMake(self.photoView.image.size.width * self.photoScroll.zoomScale, self.photoView.image.size.height * self.photoScroll.zoomScale);
+    self.photoScroll.contentSize = scaledSize;
+    
 }
 
 @end
