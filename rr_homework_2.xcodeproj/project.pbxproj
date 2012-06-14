@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		344C4E14158A3E0E00C81353 /* VacationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 344C4E13158A3E0D00C81353 /* VacationListVC.m */; };
+		344C4E17158A405C00C81353 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344C4E16158A405C00C81353 /* CoreData.framework */; };
 		344E1A9F157FB2B400C6F1DF /* PhotoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E1A9E157FB2B400C6F1DF /* PhotoListVC.m */; };
 		345D858F15810B2E00B59684 /* FlickrCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 345D858E15810B2E00B59684 /* FlickrCacher.m */; };
 		345D85921582547B00B59684 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345D85901582544000B59684 /* MapKit.framework */; };
@@ -32,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		344C4E12158A3E0D00C81353 /* VacationListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VacationListVC.h; sourceTree = "<group>"; };
+		344C4E13158A3E0D00C81353 /* VacationListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VacationListVC.m; sourceTree = "<group>"; };
+		344C4E16158A405C00C81353 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		344E1A9D157FB2B400C6F1DF /* PhotoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoListVC.h; sourceTree = "<group>"; };
 		344E1A9E157FB2B400C6F1DF /* PhotoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoListVC.m; sourceTree = "<group>"; };
 		345D858C1580FFD400B59684 /* PhotoViewerDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoViewerDataSource.h; sourceTree = "<group>"; };
@@ -80,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344C4E17158A405C00C81353 /* CoreData.framework in Frameworks */,
 				34704D24158712DF000AC436 /* CoreLocation.framework in Frameworks */,
 				345D85921582547B00B59684 /* MapKit.framework in Frameworks */,
 				34FD54661578079C00357BE7 /* UIKit.framework in Frameworks */,
@@ -94,7 +100,6 @@
 		34FD54561578079C00357BE7 = {
 			isa = PBXGroup;
 			children = (
-				34704D23158712DF000AC436 /* CoreLocation.framework */,
 				34FD546B1578079C00357BE7 /* rr_homework_2 */,
 				34FD54641578079C00357BE7 /* Frameworks */,
 				34FD54621578079C00357BE7 /* Products */,
@@ -112,6 +117,8 @@
 		34FD54641578079C00357BE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				344C4E16158A405C00C81353 /* CoreData.framework */,
+				34704D23158712DF000AC436 /* CoreLocation.framework */,
 				345D85901582544000B59684 /* MapKit.framework */,
 				34FD54651578079C00357BE7 /* UIKit.framework */,
 				34FD54671578079C00357BE7 /* Foundation.framework */,
@@ -133,6 +140,8 @@
 				34FD54751578079C00357BE7 /* AppDelegate.m */,
 				34FD54771578079C00357BE7 /* MainStoryboard_iPhone.storyboard */,
 				34FD547A1578079C00357BE7 /* MainStoryboard_iPad.storyboard */,
+				344C4E12158A3E0D00C81353 /* VacationListVC.h */,
+				344C4E13158A3E0D00C81353 /* VacationListVC.m */,
 				34A562D6157D036E003A8323 /* PhotoViewerVC.h */,
 				34A562D7157D036E003A8323 /* PhotoViewerVC.m */,
 				34FD547D1578079C00357BE7 /* PlacesVC.h */,
@@ -247,6 +256,7 @@
 				34BE112615869F8000624ACC /* ImageAnnotations.m in Sources */,
 				34704D211586F5A2000AC436 /* LocationAnnotation.m in Sources */,
 				34A7F9EA15893664002E940A /* CoreDataTableViewController.m in Sources */,
+				344C4E14158A3E0E00C81353 /* VacationListVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

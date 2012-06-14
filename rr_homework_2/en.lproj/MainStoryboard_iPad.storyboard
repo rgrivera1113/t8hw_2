@@ -6,18 +6,60 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Vacation ListVC - Vacations-->
         <scene sceneID="o7m-71-AJa">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLn-ao-vsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="GER-kt-GbH" sceneMemberID="viewController">
+                <viewController id="GER-kt-GbH" customClass="VacationListVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bhc-Ih-qMv">
                         <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tqN-kQ-5Xy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="739"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VacationCell" textLabel="NKt-No-D1k" style="IBUITableViewCellStyleDefault" id="1lf-jF-wjT">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NKt-No-D1k">
+                                                    <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GER-kt-GbH" id="mZp-KL-8Vm"/>
+                                    <outlet property="delegate" destination="GER-kt-GbH" id="rSm-WY-b1C"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Mbi-MU-8g3"/>
+                    <navigationItem key="navigationItem" title="Vacations" id="Mbi-MU-8g3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="WRI-n1-m9n">
+                            <connections>
+                                <action selector="presentVacationNameDialog:" destination="GER-kt-GbH" id="NkX-mw-lDg"/>
+                            </connections>
+                        </barButtonItem>
+                        <connections>
+                            <outlet property="rightBarButtonItem" destination="WRI-n1-m9n" id="CQg-i6-BfC"/>
+                        </connections>
+                    </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="tqN-kQ-5Xy" id="PsF-am-ef2"/>
+                        <outlet property="vacationButton" destination="WRI-n1-m9n" id="57P-Bs-dn5"/>
                         <segue destination="mA1-tV-jXh" kind="push" id="9Fx-1d-Qeb"/>
                     </connections>
                 </viewController>
@@ -496,7 +538,9 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewerVC.h"/>
             <relationships>
                 <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="photoScroll" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="photoTitle" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="rotationBar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
@@ -510,8 +554,6 @@
         <class className="PhotoViewerVC" superclassName="ImageViewerVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewerVC.h"/>
             <relationships>
-                <relationship kind="outlet" name="photoScroll" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="photoView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="splitViewBarButtonItem" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
@@ -534,6 +576,13 @@
         <class className="RotatingViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RotatingViewController.h"/>
         </class>
+        <class className="VacationListVC" superclassName="RotatingViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VacationListVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="vacationButton" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
@@ -541,6 +590,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="PLS-aO-dA1"/>
+        <segue reference="xr1-ug-f3m"/>
     </inferredMetricsTieBreakers>
 </document>

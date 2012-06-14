@@ -43,16 +43,24 @@
     self.navigationItem.title = [self refreshSplitView];
     // Start the activity indicator before kicking off the load block.
     [self animateLoadingIndicator:YES];
-
+    
+    // Get the possible URL for a cached photo.
+    // Try to get the managed context of the photo.  If it
+    // returns nil, build the URL using the dictionary definitions.
+    // If there is a managed context, get it from the photo object.    
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
 
+        // Dictionary or Managed Object
         NSString* fileName = [self.photo valueForKey:FLICKR_PHOTO_ID];
         NSData* requestedImage = [FlickrCacher grabPhotoFromCache:fileName];
 
+        // Dictionary or Managed Object.  Managed object will have the
+        // url stored off.  The dictionary will be passed to the Fetcher.
         if (!requestedImage)
             requestedImage = [NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatOriginal]];
 
+        // Dictionary or Managed Object.
         NSDictionary* displayedImage = [self.photoDelegate displayedPhoto];
         
         if (!displayedImage) {
@@ -66,6 +74,7 @@
 
             // Only cache the image if it is still selected.
             dispatch_queue_t cacheWriter = dispatch_queue_create("cache writer", NULL);
+            // Derive the filename from the last element of the NSURL.
             dispatch_async(cacheWriter, ^{
                 [FlickrCacher sendPhotoToCache:requestedImage as:fileName];
             });

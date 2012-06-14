@@ -115,17 +115,27 @@
     if (!photoName || photoName.length < 1)
         return nil;
     
-    NSURL* filePath = [self cachedImageDirectory];    
-    NSFileManager* fm = [[NSFileManager alloc] init];
+    NSURL* filePath = [self urlForCachedImage:photoName];
 
-    filePath = [filePath URLByAppendingPathComponent:photoName isDirectory:NO];
-    
+    NSFileManager* fm = [[NSFileManager alloc] init];
     if (![fm fileExistsAtPath:filePath.path])
         return nil;
 
     NSData* cachedImage = [[NSData alloc] initWithData:[fm contentsAtPath:filePath.path]];
 
     return cachedImage;
+}
+
++ (NSURL*) urlForCachedImage: (NSString*) photoName {
+    
+    NSURL* filePath = [[self cachedImageDirectory] URLByAppendingPathComponent:photoName isDirectory:NO];
+    NSFileManager* fm = [[NSFileManager alloc] init];
+    
+    if (![fm fileExistsAtPath:filePath.path])
+        return nil;
+        
+    return filePath;
+    
 }
 
 

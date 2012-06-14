@@ -15,5 +15,6 @@
 
 + (void) sendPhotoToCache: (NSData*) photo as: (NSString*) photoName;
 + (NSData*) grabPhotoFromCache: (NSString*) photoName;
++ (NSURL*) urlForCachedImage: (NSString*) photoName;
 
 @end
