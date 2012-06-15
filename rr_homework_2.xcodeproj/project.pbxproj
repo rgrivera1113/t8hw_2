@@ -12,6 +12,7 @@
 		344E1A9F157FB2B400C6F1DF /* PhotoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 344E1A9E157FB2B400C6F1DF /* PhotoListVC.m */; };
 		345D858F15810B2E00B59684 /* FlickrCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 345D858E15810B2E00B59684 /* FlickrCacher.m */; };
 		345D85921582547B00B59684 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345D85901582544000B59684 /* MapKit.framework */; };
+		3461638E158B94E80080A5CE /* StaticVacationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3461638D158B94E80080A5CE /* StaticVacationVC.m */; };
 		34704D211586F5A2000AC436 /* LocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 34704D201586F5A2000AC436 /* LocationAnnotation.m */; };
 		34704D24158712DF000AC436 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34704D23158712DF000AC436 /* CoreLocation.framework */; };
 		34A562D115797226003A8323 /* RecentPhotoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A562D015797226003A8323 /* RecentPhotoListVC.m */; };
@@ -43,6 +44,8 @@
 		345D858D15810B2E00B59684 /* FlickrCacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrCacher.h; sourceTree = "<group>"; };
 		345D858E15810B2E00B59684 /* FlickrCacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrCacher.m; sourceTree = "<group>"; };
 		345D85901582544000B59684 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3461638C158B94E80080A5CE /* StaticVacationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticVacationVC.h; sourceTree = "<group>"; };
+		3461638D158B94E80080A5CE /* StaticVacationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticVacationVC.m; sourceTree = "<group>"; };
 		34704D1F1586F5A2000AC436 /* LocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotation.h; sourceTree = "<group>"; };
 		34704D201586F5A2000AC436 /* LocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotation.m; sourceTree = "<group>"; };
 		34704D23158712DF000AC436 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -142,6 +145,8 @@
 				34FD547A1578079C00357BE7 /* MainStoryboard_iPad.storyboard */,
 				344C4E12158A3E0D00C81353 /* VacationListVC.h */,
 				344C4E13158A3E0D00C81353 /* VacationListVC.m */,
+				3461638C158B94E80080A5CE /* StaticVacationVC.h */,
+				3461638D158B94E80080A5CE /* StaticVacationVC.m */,
 				34A562D6157D036E003A8323 /* PhotoViewerVC.h */,
 				34A562D7157D036E003A8323 /* PhotoViewerVC.m */,
 				34FD547D1578079C00357BE7 /* PlacesVC.h */,
@@ -257,6 +262,7 @@
 				34704D211586F5A2000AC436 /* LocationAnnotation.m in Sources */,
 				34A7F9EA15893664002E940A /* CoreDataTableViewController.m in Sources */,
 				344C4E14158A3E0E00C81353 /* VacationListVC.m in Sources */,
+				3461638E158B94E80080A5CE /* StaticVacationVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

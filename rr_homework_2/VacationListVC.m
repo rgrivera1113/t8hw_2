@@ -7,8 +7,9 @@
 //
 
 #import "VacationListVC.h"
+#import "StaticVacationVC.h"
 
-@interface VacationListVC () <UIAlertViewDelegate>
+@interface VacationListVC () <UIAlertViewDelegate,SelectedURLDelegate>
 
 @property (nonatomic,weak) IBOutlet UITableView* tableView;
 
@@ -131,35 +132,46 @@
             
         } else {
             
-            NSFileManager* fm = [[NSFileManager alloc] init];
-            NSArray* directory = [fm URLsForDirectory: NSDocumentDirectory 
-                                            inDomains: NSUserDomainMask];
-            NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"Vacations" isDirectory:YES];
-            NSString* fileName = [alertView textFieldAtIndex:0].text;
-            filePath = [filePath URLByAppendingPathComponent:fileName isDirectory:NO];
+            dispatch_queue_t vacationCreationQueue = dispatch_queue_create("create vacation", NULL);
+            dispatch_async(vacationCreationQueue, ^{
+                NSFileManager* fm = [[NSFileManager alloc] init];
+                NSArray* directory = [fm URLsForDirectory: NSDocumentDirectory 
+                                                inDomains: NSUserDomainMask];
+                NSURL* filePath = [[directory objectAtIndex:0] URLByAppendingPathComponent:@"Vacations" 
+                                                                               isDirectory:YES];
+                NSString* fileName = [alertView textFieldAtIndex:0].text;
+                filePath = [filePath URLByAppendingPathComponent:fileName 
+                                                     isDirectory:NO];
+                
+                // Create a new NSManagedObject with the filename and save to disk.
+                UIManagedDocument* doc = [[UIManagedDocument alloc] initWithFileURL:filePath];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [doc saveToURL:filePath forSaveOperation:UIDocumentSaveForCreating 
+                 completionHandler:^(BOOL success) { [self refreshVacationList];}];
+                });
+            });
+            dispatch_release(vacationCreationQueue);
             
-            // Create a new NSManagedObject with the filename and save to disk.
-            UIManagedDocument* doc = [[UIManagedDocument alloc] initWithFileURL:filePath];
-            [doc saveToURL:filePath forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                [self refreshVacationList];
-            }];
         }
-    }
-    
-}
-
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if (buttonIndex != [alertView cancelButtonIndex]) {
-        // Take contents of text field and create a new managed document to file.
-        
     }
     
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"StaticTableSegue"]) {
+        
+        if ([segue.destinationViewController isKindOfClass:[StaticVacationVC class]])
+            [segue.destinationViewController setParentDelegate:self];
+        
+    }
+    
 }
 
 #pragma mark - Table view data source
@@ -178,6 +190,9 @@
 {
     static NSString *CellIdentifier = @"VacationCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
     cell.textLabel.text = [[self.vacationList objectAtIndex:indexPath.row] lastPathComponent];
     
@@ -227,13 +242,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
+    [self performSegueWithIdentifier:@"StaticTableSegue" sender:self];
+    
+}
+
+- (NSURL*) selectedURL {
+    
+    return [self.vacationList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    
 }
 
 @end
