@@ -38,14 +38,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    // Pass the selected URL from the delegate.
-    if ([segue.identifier isEqualToString:@"TagSearchSegue"])
-    {
-        
-    } else if ([segue.identifier isEqualToString:@"ItinerarySegue"]) {
-        
-    }
-    
+    [segue.destinationViewController setParentDelegate:self];
 }
 
 #pragma mark - Table view data source
@@ -78,6 +71,16 @@
 }
 
 #pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (indexPath.row == 0)
+        [self performSegueWithIdentifier:@"ItinerarySegue" sender:self];
+    else if (indexPath.row == 1)
+        [self performSegueWithIdentifier:@"TagSearchSegue" sender:self];
+            
+}
+
 
 - (NSURL*) selectedURL {
     
