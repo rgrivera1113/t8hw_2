@@ -7,22 +7,29 @@
 //
 
 #import "ItineraryVC.h"
-#import "StaticVacationVC.h"
+#import "Place+Create.h"
+#import "ItineraryPhotosVC.h"
 
 @interface ItineraryVC ()
-
-@property (nonatomic,weak) id<SelectedURLDelegate> parent;
 
 @end
 
 @implementation ItineraryVC
 
 @synthesize dataBase = _dataBase;
-@synthesize parent = _parent;
+@synthesize parentDelegate= _parentDelegate;
 
 - (void) prepareFetchResults {
     
-    // Set up a fetch request to pull places.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Place"];
+    request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"visited_on" 
+                                                                                     ascending:YES 
+                                                                                      selector:@selector(localizedCaseInsensitiveCompare:)]];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                        managedObjectContext:self.dataBase.managedObjectContext
+                                                                          sectionNameKeyPath:nil
+                                                                                   cacheName:nil];
     
     
 }
@@ -48,7 +55,7 @@
 - (void) viewWillAppear:(BOOL)animated {
     
     if (!self.dataBase)
-        self.dataBase = [[UIManagedDocument alloc] initWithFileURL:[self.parent selectedURL]];
+        self.dataBase = [[UIManagedDocument alloc] initWithFileURL:[self.parentDelegate selectedURL]];
     
 }
 
@@ -61,20 +68,35 @@
     
 }
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"PhotosFromItinerary"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        [segue.destinationViewController setPhotoTakenAt: [self.fetchedResultsController objectAtIndexPath:indexPath]];
+    }
+    
 }
 
 #pragma mark - Table view data source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"PlaceCell";
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    Place* place = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    // Then configure the cell using it ...
+    cell.textLabel.text = place.place_id;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photos", [place.photos count]];
     
     return cell;
 }
@@ -83,13 +105,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+
 }
+
+- (NSURL*) selectedURL {
+    
+    return [self.parentDelegate selectedURL];
+    
+}
+
 
 @end

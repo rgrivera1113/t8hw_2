@@ -10,4 +10,7 @@
 
 @interface Photo (Create)
 
++ (Photo*) addPhoto:(NSDictionary*) photo toContext: (NSManagedObjectContext*) context;
+
+
 @end

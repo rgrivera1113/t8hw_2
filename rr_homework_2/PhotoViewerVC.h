@@ -10,7 +10,12 @@
 #import "SplitViewPresenter.h"
 #import "PhotoViewerDataSource.h"
 #import "ImageViewerVC.h"
+#import "CoreDataPhotoDelegate.h"
 
-@interface PhotoViewerVC : ImageViewerVC <UIScrollViewDelegate, SplitViewPresenter>
+@interface PhotoViewerVC : ImageViewerVC <UIScrollViewDelegate, SplitViewPresenter,CoreDataPhotoDelegate>
+
+- (void) handlePhotoForVacation: (UIManagedDocument*) vacation;
+- (NSString*) currentPhotoIdentification;
+- (NSUInteger) photoExistsInVacation: (UIManagedDocument*) vacation;
 
 @end

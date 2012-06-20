@@ -2,7 +2,7 @@
 //  Place.m
 //  rr_homework_2
 //
-//  Created by Robert Rivera on 6/15/12.
+//  Created by Robert Rivera on 6/19/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -13,8 +13,7 @@
 @implementation Place
 
 @dynamic place_id;
-@dynamic latitude;
-@dynamic longitude;
+@dynamic visited_on;
 @dynamic photos;
 
 @end

@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
+#import "StaticVacationVC.h"
 
 @interface ItineraryVC : CoreDataTableViewController
 
 @property (nonatomic,strong) UIManagedDocument* dataBase;
+@property (nonatomic,weak) id<SelectedURLDelegate> parentDelegate;
 
 @end

@@ -2,7 +2,7 @@
 //  Photo.h
 //  rr_homework_2
 //
-//  Created by Robert Rivera on 6/15/12.
+//  Created by Robert Rivera on 6/20/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -13,12 +13,12 @@
 
 @interface Photo : NSManagedObject
 
-@property (nonatomic, retain) NSString * photo_id;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * subtitle;
-@property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSNumber * latitidue;
 @property (nonatomic, retain) NSNumber * longitude;
+@property (nonatomic, retain) NSString * photo_id;
+@property (nonatomic, retain) NSString * subtitle;
+@property (nonatomic, retain) NSString * photo_title;
+@property (nonatomic, retain) NSString * photo_url;
 @property (nonatomic, retain) Place *photo_place;
 @property (nonatomic, retain) NSSet *photo_tags;
 @end

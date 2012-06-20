@@ -2,7 +2,7 @@
 //  Place.h
 //  rr_homework_2
 //
-//  Created by Robert Rivera on 6/15/12.
+//  Created by Robert Rivera on 6/19/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,8 +14,7 @@
 @interface Place : NSManagedObject
 
 @property (nonatomic, retain) NSString * place_id;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
+@property (nonatomic, retain) NSDate * visited_on;
 @property (nonatomic, retain) NSSet *photos;
 @end
 

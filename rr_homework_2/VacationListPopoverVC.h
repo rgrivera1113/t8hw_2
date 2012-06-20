@@ -8,10 +8,11 @@
 
 #import "VacationListVC.h"
 #import "PhotoViewerVC.h"
+#import "CoreDataPhotoDelegate.h"
 
 @interface VacationListPopoverVC : VacationListVC
 
-@property (nonatomic,strong) PhotoViewerVC* parent;
+@property (nonatomic,strong) id<CoreDataPhotoDelegate> parent;
 
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ImageViewerVC.h"
 #import "FlickrFetcher.h"
+#import "VacationListPopoverVC.h"
 
 @interface ImageViewerVC ()
 
@@ -27,6 +28,7 @@
 @synthesize loadingIndicator = _loadingIndicator;
 @synthesize photoScroll = _photoScroll;
 @synthesize photoView = _photoView;
+@synthesize vcp = _vcp;
 
 # pragma mark <splitviewpresenter> implementation
 - (void) handlePopoverBarButton: (UIBarButtonItem*) barButtonItem {
@@ -53,22 +55,11 @@
         [self handlePopoverBarButton:splitViewBarButtonItem];
 }
 
-- (NSString*) refreshSplitView {
+- (void) refreshSplitView: (NSString*) photoTitle {
     
     [self handlePopoverBarButton:self.splitViewBarButtonItem];
-    
-    return [self updatePhotoTitle];
+    self.photoTitle.title = photoTitle;
 }
-
-- (void) animateLoadingIndicator: (BOOL) setting {
-    
-    if (setting)
-        [self.loadingIndicator startAnimating];
-    else
-        [self.loadingIndicator stopAnimating];
-    
-}
-
 
 - (NSString*) updatePhotoTitle {
     
@@ -86,6 +77,17 @@
     return photoTitle;
     
 }
+
+
+- (void) animateLoadingIndicator: (BOOL) setting {
+    
+    if (setting)
+        [self.loadingIndicator startAnimating];
+    else
+        [self.loadingIndicator stopAnimating];
+    
+}
+
 
 - (void) setPhoto:(NSDictionary *)photo {
     
@@ -133,6 +135,26 @@
     
     CGSize scaledSize = CGSizeMake(self.photoView.image.size.width * self.photoScroll.zoomScale, self.photoView.image.size.height * self.photoScroll.zoomScale);
     self.photoScroll.contentSize = scaledSize;
+    
+}
+
+- (IBAction)presentVacationListPopover:(id)sender {
+    
+    // If a photo is not displayed, don't present the popover.
+    if (self.photo) {
+        if (self.vcp) {
+            [self.vcp dismissPopoverAnimated:YES];
+            self.vcp = nil;
+        }
+        else 
+            [self performSegueWithIdentifier:@"VacationListPopover" sender:sender];
+    }
+    
+}
+
+- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    
+    self.vcp = nil;
     
 }
 

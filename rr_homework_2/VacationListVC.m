@@ -142,11 +142,10 @@
                 NSString* fileName = [alertView textFieldAtIndex:0].text;
                 filePath = [filePath URLByAppendingPathComponent:fileName 
                                                      isDirectory:NO];
-                
-                // Create a new NSManagedObject with the filename and save to disk.
-                UIManagedDocument* doc = [[UIManagedDocument alloc] initWithFileURL:filePath];
-                
+                                
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    // Create a new NSManagedObject with the filename and save to disk.
+                    UIManagedDocument* doc = [[UIManagedDocument alloc] initWithFileURL:filePath];
                     [doc saveToURL:filePath forSaveOperation:UIDocumentSaveForCreating 
                  completionHandler:^(BOOL success) { [self refreshVacationList];}];
                 });

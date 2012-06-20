@@ -1,25 +1,25 @@
 //
-//  PhotoViewerVC.m
+//  CoreDataPhotoViewerVC.m
 //  rr_homework_2
 //
-//  Created by Robert Rivera on 6/4/12.
+//  Created by Robert Rivera on 6/19/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PhotoViewerVC.h"
-#import "FlickrFetcher.h"
-#import "FlickrCacher.h"
-#import "PhotoListVC.h"
-#import "PhotoViewerDataSource.h"
-#import "VacationListPopoverVC.h"
+#import "CoreDataPhotoViewerVC.h"
 #import <CoreData/CoreData.h>
+#import "FlickrFetcher.h"
 #import "Photo+Create.h"
+#import "FlickrCacher.h"
+#import "VacationListPopoverVC.h"
 
-@interface PhotoViewerVC ()
+@interface CoreDataPhotoViewerVC ()
 
 @end
 
-@implementation PhotoViewerVC
+@implementation CoreDataPhotoViewerVC
+
+@synthesize coreDataPhotoDelegate = _coreDataPhotoDelegate;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -28,15 +28,12 @@
 
 - (NSString*) updatePhotoTitle {
     
-    NSString* photoTitle = [self.photo valueForKey:FLICKR_PHOTO_TITLE];
-    NSString* photoDescription = [self.photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+    NSString* photoTitle = [self.photo photo_title];
+    NSString* photoDescription = [self.photo subtitle];
     if (photoTitle.length < 1) {
-        if (photoDescription.length > 0){
-            if (photoDescription.length < 25)
-                photoTitle = [photoDescription substringToIndex:photoDescription.length];
-            else
-                photoTitle = [photoDescription substringToIndex:25]; 
-        } else 
+        if (photoDescription.length > 0)
+            photoTitle = [photoDescription substringToIndex:25];
+        else 
             photoTitle = @"Unknown";
     } else if (photoTitle.length > 25){
         photoTitle = [photoTitle substringToIndex:25];
@@ -59,30 +56,29 @@
     // Get the possible URL for a cached photo.
     dispatch_queue_t downloadQueue = dispatch_queue_create("flickr downloader", NULL);
     dispatch_async(downloadQueue, ^{
-
-        NSString* fileName = [self.photo valueForKey:FLICKR_PHOTO_ID];
-        NSData* requestedImage = [FlickrCacher grabPhotoFromCache:fileName];
-
+        
+        NSData* requestedImage = [FlickrCacher grabPhotoFromCache:[self.photo photo_id]];
+        
         if (!requestedImage)
-            requestedImage = [NSData dataWithContentsOfURL:[FlickrFetcher urlForPhoto:self.photo format:FlickrPhotoFormatOriginal]];
-
+            requestedImage = [NSData dataWithContentsOfURL: [NSURL URLWithString:[self.photo photo_url]]];
+        
         // Dictionary or Managed Object.
-        NSDictionary* displayedImage = [self.photoDelegate displayedPhoto];
+        Photo* displayedImage = [self.coreDataPhotoDelegate displayedPhoto];
         
         if (!displayedImage) {
-        
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self animateLoadingIndicator:NO];
             });
             
         }
         else if (self.photo == displayedImage) {
-
+            
             // Only cache the image if it is still selected.
             dispatch_queue_t cacheWriter = dispatch_queue_create("cache writer", NULL);
             // Derive the filename from the last element of the NSURL.
             dispatch_async(cacheWriter, ^{
-                [FlickrCacher sendPhotoToCache:requestedImage as:fileName];
+                [FlickrCacher sendPhotoToCache:requestedImage as:[self.photo photo_url]];
             });
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -119,7 +115,7 @@
     
     [self.vcp dismissPopoverAnimated:YES];
     self.vcp = nil;
-
+    
 }
 
 - (NSUInteger) photoExistsInVacation: (UIManagedDocument*) vacation {
@@ -128,7 +124,7 @@
     NSManagedObjectContext* context = [vacation managedObjectContext];
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
     request.predicate = [NSPredicate predicateWithFormat:@"photo_id = %@", 
-                         [self currentPhotoIdentification]];
+                         [self.photo photo_id]];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"photo_id" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -137,7 +133,6 @@
     
     return photos.count;    
 }
-
 
 - (void) prepVacation: (UIManagedDocument*) vacation {
     
@@ -189,15 +184,7 @@
         [Photo addPhoto:self.photo toContext:[vacation managedObjectContext]];
         [vacation saveToURL:vacation.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
     }];
-
-}
-
-
-- (NSString*) currentPhotoIdentification {
-    
-    return [self.photo valueForKey:FLICKR_PHOTO_ID];
     
 }
-
 
 @end

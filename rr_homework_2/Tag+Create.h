@@ -10,4 +10,7 @@
 
 @interface Tag (Create)
 
++ (Tag*) createTag: (NSString*) tag withContext:(NSManagedObjectContext*) context;
+
+
 @end
