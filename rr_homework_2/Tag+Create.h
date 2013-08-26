@@ -11,6 +11,7 @@
 @interface Tag (Create)
 
 + (Tag*) createTag: (NSString*) tag withContext:(NSManagedObjectContext*) context;
++ (void) removeTag: (Tag*) tag fromVacation: (NSManagedObjectContext*) context;
 
 
 @end

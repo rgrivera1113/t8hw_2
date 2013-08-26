@@ -1,43 +1,44 @@
 //
-//  ItineraryPhotosVC.m
+//  TagSearchPhotosVC.m
 //  rr_homework_2
 //
-//  Created by Robert Rivera on 6/19/12.
+//  Created by Robert Rivera on 6/20/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ItineraryPhotosVC.h"
-#import "Photo+Create.h"
+#import "TagSearchPhotosVC.h"
+#import "CoreDataPhotoDelegate.h"
 #import "CoreDataPhotoViewerVC.h"
 
-@interface ItineraryPhotosVC ()
+@interface TagSearchPhotosVC ()
 
 @end
 
-@implementation ItineraryPhotosVC
+@implementation TagSearchPhotosVC
 
-@synthesize photoTakenAt = _photoTakenAt;
+@synthesize tagForPhotos = _tagForPhotos;
 
 - (void) prepareFetchResults {
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
     request.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"photo_id" 
-                                                                                     ascending:YES 
+                                                                                     ascending:NO 
                                                                                       selector:@selector(localizedCaseInsensitiveCompare:)]];
-    request.predicate = [NSPredicate predicateWithFormat:@"photo_place.place_id = %@", self.photoTakenAt.place_id];
+    // Get the keypath for _tagForPhotos
+    request.predicate = [NSPredicate predicateWithFormat:@"ANY photo_tags.tag_id = %@", self.tagForPhotos.tag_id];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                                        managedObjectContext:self.photoTakenAt.managedObjectContext
+                                                                        managedObjectContext:self.tagForPhotos.managedObjectContext
                                                                           sectionNameKeyPath:nil
                                                                                    cacheName:nil];
     
     
 }
 
-- (void) setPhotoTakenAt:(Place *)photoTakenAt {
-    
-    _photoTakenAt = photoTakenAt;
-    self.title = photoTakenAt.place_id;
+- (void) setTagForPhotos:(Tag *)tagForPhotos {
+
+    _tagForPhotos = tagForPhotos;
+    self.title = tagForPhotos.tag_id;
     [self prepareFetchResults];
     
     
@@ -65,7 +66,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"PlacePhotoCell";
+    static NSString *CellIdentifier = @"TaggedPhotos";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -97,7 +98,7 @@
     NSIndexPath* selected = [self.tableView indexPathForSelectedRow];
     
     return [self.fetchedResultsController objectAtIndexPath:selected];
-
+    
 }
 
 - (void) refreshData {

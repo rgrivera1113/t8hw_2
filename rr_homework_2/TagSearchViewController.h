@@ -7,7 +7,12 @@
 //
 
 #import "CoreDataTableViewController.h"
+#import <CoreData/CoreData.h>
+#import "StaticVacationVC.h"
 
 @interface TagSearchViewController : CoreDataTableViewController
+
+@property (nonatomic,strong) UIManagedDocument* dataBase;
+@property (nonatomic,weak) id<SelectedURLDelegate> parentDelegate;
 
 @end

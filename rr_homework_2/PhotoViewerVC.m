@@ -178,6 +178,24 @@
 - (void) removePhotoFromVacation: (UIManagedDocument*) vacation {
     
     NSLog(@"Removing photo from vacation.");
+    NSManagedObjectContext* context = [vacation managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    request.predicate = [NSPredicate predicateWithFormat:@"photo_id = %@", 
+                         [self currentPhotoIdentification]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"photo_id" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error = nil;
+    NSArray *photos = [context executeFetchRequest:request error:&error];
+    
+    if (photos.count != 1) {
+        NSLog(@"Problem deleting photo from vacation.  Abort.");
+    } else {
+        [context performBlock:^{
+            [Photo removePhoto:[photos lastObject] fromVacation:vacation.managedObjectContext];
+            [vacation saveToURL:vacation.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
+        }];
+    }
     
 }
 

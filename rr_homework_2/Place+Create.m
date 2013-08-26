@@ -37,4 +37,11 @@
     return resultingPlace;
 }
 
++ (void) removePlace: (Place*) place fromVacation: (NSManagedObjectContext*) context {
+    
+    NSLog(@"Deleting %@ from database.",place.place_id);
+    [context deleteObject:place];
+    
+}
+
 @end

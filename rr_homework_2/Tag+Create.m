@@ -43,5 +43,12 @@
     
 }
 
++ (void) removeTag: (Tag*) tag fromVacation: (NSManagedObjectContext*) context {
+    
+    NSLog(@"Removing %@ from database.",tag.tag_id);
+    [context deleteObject:tag];
+    
+}
+
 
 @end

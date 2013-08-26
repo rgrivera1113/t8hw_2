@@ -111,6 +111,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.photoScroll.contentOffset = CGPointMake(25, 25);
 	// Do any additional setup after loading the view.
 }
 

@@ -10,6 +10,7 @@
 
 @interface Place (Create)
 
-+ (Place*) createPlace: (NSString*) place withContext:(NSManagedObjectContext*) context;
++ (Place*) createPlace: (NSString*) place withContext: (NSManagedObjectContext*) context;
++ (void) removePlace: (Place*) place fromVacation: (NSManagedObjectContext*) context;
 
 @end

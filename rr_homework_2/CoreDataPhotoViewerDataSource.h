@@ -12,5 +12,6 @@
 @protocol CoreDataPhotoViewerDataSource <NSObject>
 
 - (Photo*) displayedPhoto;
+- (void) refreshData;
 
 @end

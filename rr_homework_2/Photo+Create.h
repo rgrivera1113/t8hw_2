@@ -11,6 +11,7 @@
 @interface Photo (Create)
 
 + (Photo*) addPhoto:(NSDictionary*) photo toContext: (NSManagedObjectContext*) context;
++ (void) removePhoto:(Photo*) photo fromVacation: (NSManagedObjectContext*) context;
 
 
 @end

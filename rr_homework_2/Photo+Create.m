@@ -43,8 +43,23 @@
     } else if ([matches count] == 0) {
         resultingPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
         resultingPhoto.photo_id = [photo objectForKey:FLICKR_PHOTO_ID];
-        resultingPhoto.photo_title = [photo objectForKey:FLICKR_PHOTO_TITLE];
-        resultingPhoto.subtitle = [photo valueForKeyPath:FLICKR_PHOTO_DESCRIPTION];
+        NSString* potentialTitle = [photo objectForKey:FLICKR_PHOTO_TITLE];
+        NSString* potentialSubtitle = [photo objectForKey:FLICKR_PHOTO_DESCRIPTION];
+        
+        if (potentialTitle.length < 1) {
+            if (potentialSubtitle.length > 0)
+                resultingPhoto.photo_title = potentialSubtitle;
+            else 
+                resultingPhoto.photo_title = @"Unknown";
+            resultingPhoto.subtitle = @"";
+        } else {
+            resultingPhoto.photo_title = potentialTitle;
+            if (potentialSubtitle.length > 0)
+                resultingPhoto.subtitle = potentialSubtitle;
+            else
+                resultingPhoto.subtitle = @"";
+        }
+        
         resultingPhoto.photo_url = [[FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatOriginal] absoluteString];
         resultingPhoto.latitidue = [photo objectForKey:FLICKR_LATITUDE];
         resultingPhoto.longitude = [photo objectForKey:FLICKR_LONGITUDE];
@@ -74,5 +89,37 @@
     return resultingPhoto;
 }
 
++ (void) removePhoto:(Photo*) photo fromVacation: (NSManagedObjectContext*) context {
+    
+    NSLog(@"Removing photo from database.");
+    
+    NSMutableSet* tags = [photo.photo_tags mutableCopy];
+    
+    
+    for (Tag* tag in tags) {
+        
+        NSMutableSet* photos = [tag.photos mutableCopy];
+        [photos removeObject:photo];
+        tag.photos = [photos copy];
+        tag.photo_count = [NSNumber numberWithInt:tag.photos.count];
+        NSLog(@"Tag %@ has %d associated photos.",tag.tag_id,[tag.photo_count intValue]);
+        if ([tag.photo_count intValue] < 1)
+            [Tag removeTag:tag fromVacation: context];
+        
+    }
+    
+    NSMutableSet* places = [photo.photo_place.photos mutableCopy];
+    
+    [places removeObject:photo];
+    
+    if (places.count < 1) {
+        [Place removePlace:photo.photo_place fromVacation:context];
+    } else {
+        photo.photo_place.photos = [places copy];
+    }
+    
+    [context deleteObject:photo];
+
+}
 
 @end

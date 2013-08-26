@@ -76,9 +76,8 @@
             
             // Only cache the image if it is still selected.
             dispatch_queue_t cacheWriter = dispatch_queue_create("cache writer", NULL);
-            // Derive the filename from the last element of the NSURL.
             dispatch_async(cacheWriter, ^{
-                [FlickrCacher sendPhotoToCache:requestedImage as:[self.photo photo_url]];
+                [FlickrCacher sendPhotoToCache:requestedImage as:[self.photo photo_id]];
             });
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -173,6 +172,29 @@
 - (void) removePhotoFromVacation: (UIManagedDocument*) vacation {
     
     NSLog(@"Removing photo from vacation.");
+    NSManagedObjectContext* context = [vacation managedObjectContext];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    request.predicate = [NSPredicate predicateWithFormat:@"photo_id = %@", 
+                         [self.photo photo_id]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"photo_id" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error = nil;
+    NSArray *photos = [context executeFetchRequest:request error:&error];
+    
+    if (photos.count != 1) {
+        NSLog(@"Problem deleting photo from vacation.  Abort.");
+    } else {
+        [context performBlock:^{
+            self.photoView.image = nil;
+            [Photo removePhoto:[photos lastObject] fromVacation:vacation.managedObjectContext];
+            [vacation saveToURL:vacation.fileURL 
+               forSaveOperation:UIDocumentSaveForOverwriting 
+              completionHandler:^(BOOL success){
+                [self.coreDataPhotoDelegate refreshData];   
+              }];
+        }];
+    }
     
 }
 
@@ -182,7 +204,11 @@
     NSManagedObjectContext* context = [vacation managedObjectContext];
     [context performBlock:^{
         [Photo addPhoto:self.photo toContext:[vacation managedObjectContext]];
-        [vacation saveToURL:vacation.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:NULL];
+        [vacation saveToURL:vacation.fileURL 
+           forSaveOperation:UIDocumentSaveForOverwriting 
+          completionHandler:^(BOOL success){
+            [self.coreDataPhotoDelegate refreshData];   
+          }];
     }];
     
 }
